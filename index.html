@@ -6,7 +6,12 @@
     <title>PrepHooks — Learn what matters</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* Additional landing page-specific tweaks */
+        /* ----- Hero ----- */
+        .hero {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 88px 24px 56px;
+        }
         .hero h1 {
             font-size: clamp(42px, 7vw, 72px);
             font-weight: 700;
@@ -15,48 +20,43 @@
             max-width: 12ch;
             margin-bottom: 24px;
         }
-
-        .hero .sub-headline {
+        .hero p {
             font-size: 20px;
             line-height: 1.7;
             color: #4b4b4b;
             max-width: 34em;
             margin-bottom: 20px;
         }
-
-        .exam-tags {
+        .hero .exam-tags {
             font-size: 15px;
             color: #888888;
             letter-spacing: 0.02em;
             margin-top: 4px;
         }
-
-        .cta-row {
+        .hero .cta-row {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
             margin-top: 36px;
         }
 
+        /* ----- Sections (blocks) ----- */
         .block {
-            padding: 120px 40px;
+            padding: 120px 24px;
             max-width: 960px;
             margin: 0 auto;
         }
-
         .block .inner {
             max-width: 620px;
             margin: 0 auto;
         }
-
         .block h2 {
             font-size: clamp(30px, 4vw, 40px);
-            font-weight: 650;
+            font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.05;
             margin-bottom: 16px;
         }
-
         .block p {
             font-size: 19px;
             line-height: 1.7;
@@ -65,25 +65,23 @@
             margin-bottom: 0;
         }
 
+        /* ----- Download CTA ----- */
         .download {
             background: #f7f7f7;
-            padding: 120px 40px;
+            padding: 120px 24px;
             text-align: center;
         }
-
         .download .inner {
             max-width: 620px;
             margin: 0 auto;
         }
-
         .download h2 {
             font-size: clamp(34px, 4.5vw, 44px);
-            font-weight: 650;
+            font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.05;
             margin-bottom: 16px;
         }
-
         .download p {
             font-size: 19px;
             color: #4b4b4b;
@@ -91,13 +89,22 @@
             margin: 0 auto 32px;
             line-height: 1.7;
         }
+        .download .cta-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
 
-        /* Responsive */
+        /* ----- Responsive ----- */
         @media (max-width: 640px) {
+            .hero {
+                padding: 60px 20px 40px;
+            }
             .hero h1 {
                 font-size: 36px;
             }
-            .hero .sub-headline {
+            .hero p {
                 font-size: 17px;
             }
             .block {
@@ -144,43 +151,51 @@
     <!-- ===== HERO ===== -->
     <div class="hero">
         <h1>Learn what matters.</h1>
-        <p class="sub-headline">Most students don't know what they're missing. PrepHooks finds it for you.</p>
+        <p>Most students don't know what they're missing. PrepHooks finds it for you.</p>
         <p class="exam-tags">JAMB · WAEC · NECO · NMCN · MDCN</p>
         <div class="cta-row">
             <a href="#download" class="btn">Download — It's free</a>
         </div>
     </div>
 
-    <!-- ===== SECTION 1: KNOW YOUR GAPS ===== -->
+    <!-- ===== SECTION 1 ===== -->
     <section class="block">
         <div class="inner">
-            <h2>Know your gaps.</h2>
-            <p>Most students don't know what they're missing. PrepHooks finds it for you.</p>
+            <h2>Learn through retrieval.</h2>
+            <p>Most students spend too much time rereading notes. PrepHooks replaces passive revision with deliberate practice that strengthens memory every time you answer a question. Every session reveals what you know, what you've forgotten, and what deserves your attention next.</p>
         </div>
     </section>
 
-    <!-- ===== SECTION 2: STUDY LESS. LEARN MORE. ===== -->
+    <!-- ===== SECTION 2 ===== -->
     <section class="block">
         <div class="inner">
-            <h2>Study less. Learn more.</h2>
-            <p>Short sessions. One question at a time. No long videos. No endless reading.</p>
+            <h2>Progress becomes visible.</h2>
+            <p>Learning shouldn't feel random. Your progress is measured continuously so you always understand your strengths, your weak areas, and where to focus before your exam.</p>
         </div>
     </section>
 
-    <!-- ===== SECTION 3: WALK IN READY ===== -->
+    <!-- ===== SECTION 3 ===== -->
     <section class="block">
         <div class="inner">
-            <h2>Walk in ready.</h2>
-            <p>You'll know where you stand before exam day. No surprises.</p>
+            <h2>Designed to stay out of your way.</h2>
+            <p>A learning tool shouldn't compete for your attention. Every screen is intentionally minimal. Clean typography, generous spacing, and thoughtful interactions help you focus entirely on the questions in front of you.</p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4 ===== -->
+    <section class="block">
+        <div class="inner">
+            <h2>Practice that adapts to you.</h2>
+            <p>Effective learning depends on retrieval, not repetition. PrepHooks adapts each practice session based on what you've already mastered and where you're struggling, helping you spend more time on what matters most.</p>
         </div>
     </section>
 
     <!-- ===== DOWNLOAD CTA ===== -->
     <div class="download" id="download">
         <div class="inner">
-            <h2>The solution is in your hands.</h2>
-            <p>Download PrepHooks. Start for free. See what happens.</p>
-            <div class="cta-row" style="justify-content: center;">
+            <h2>Ready when you are.</h2>
+            <p>Download PrepHooks and start preparing with focused, adaptive practice.</p>
+            <div class="cta-row">
                 <a href="#" class="btn">Get it on Google Play</a>
                 <a href="#" class="btn btn-outline">Download on the App Store</a>
             </div>
