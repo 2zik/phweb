@@ -6,7 +6,8 @@
 
 ## 🎯 About PrepHooks
 
-PrepHooks is an exam-driven preparation platform designed to help students master critical examinations through active recall, adaptive challenges, and distraction-free practice. Rather than measuring time spent on passive reading, PrepHooks focuses on recall accuracy to turn everyday study sessions into predictable exam results.
+PrepHooks is built on a simple truth: real confidence in an exam hall is not born from mindless repetition, but from genuine engagement with what you know. Designed around intuitive practice and steady, focused effort, it shifts the story away from passive reading. By focusing on active recall and clear feedback, PrepHooks helps students deepen their understanding, build true familiarity with their subjects, and step into every exam with clarity and poise.
+
 
 ---
 
