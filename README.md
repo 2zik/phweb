@@ -8,6 +8,7 @@
 
 PrepHooks is built on a simple truth: real confidence in an exam hall is not born from mindless repetition, but from genuine engagement with what you know. Designed around intuitive practice and steady, focused effort, it shifts the story away from passive reading. By focusing on active recall and clear feedback, PrepHooks helps students deepen their understanding, build true familiarity with their subjects, and step into every exam with clarity and poise.
 
+Wisdom is not measured by the number of hours spent staring blankly at a textbook. PrepHooks is built for students who intend to approach their exams with purpose, using active recall, dynamic challenges, and distraction-free practice. By testing what your mind can actually retrieve—rather than the pages you have passively turned—we turn daily preparation into solid, undeniable exam results.
 
 ---
 
