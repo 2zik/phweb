@@ -1,219 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrepHooks — Boost Your Score</title>
-<link rel="stylesheet" href="style.css">
-<style>
-  /* ---------- Hero ---------- */
-  .hero{
-    max-width:980px;
-    margin:0 auto;
-    padding:110px 24px 90px;
-    text-align:center;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrepHooks — Learn the way your brain remembers</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ---------- Reset & base ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #ffffff;
+      color: #111111;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .hero .brand-eyebrow{
-    font-size:16px;
-    font-weight:600;
-    color:var(--gray-400);
-    margin-bottom:28px;
-    letter-spacing:.02em;
-  }
+    a { text-decoration: none; color: inherit; }
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 550;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      border: 1px solid transparent;
+      transition: background 0.2s, color 0.2s, border 0.2s;
+      cursor: pointer;
+      background: #111111;
+      color: #ffffff;
+    }
+    .btn:hover { background: #2a2a2a; }
+    .btn-outline {
+      background: transparent;
+      color: #111111;
+      border-color: #cccccc;
+    }
+    .btn-outline:hover { background: #f5f5f5; border-color: #aaaaaa; }
 
-  .hero h1{
-    font-size:clamp(42px,7vw,72px);
-    font-weight:700;
-    letter-spacing:-0.03em;
-    line-height:1.08;
-    max-width:16ch;
-    margin:0 auto 40px;
-  }
+    /* ---------- Header ---------- */
+    header {
+      padding: 28px 32px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #111111;
+    }
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 15px;
+      font-weight: 450;
+      color: #444444;
+    }
+    .top-nav a { transition: color 0.2s; }
+    .top-nav a:hover { color: #000000; }
+    .top-nav .nav-cta {
+      background: #111111;
+      color: #ffffff;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 14px;
+      border: none;
+      transition: background 0.2s;
+    }
+    .top-nav .nav-cta:hover { background: #2a2a2a; color: #ffffff; }
 
-  .hero .cta-row{
-    display:flex;
-    justify-content:center;
-    gap:16px;
-    margin-bottom:56px;
-    flex-wrap:wrap;
-  }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: #111111;
+      transition: 0.2s;
+    }
 
-  .hero .available{
-    font-size:15px;
-    color:var(--gray-400);
-    font-weight:600;
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    margin-bottom:10px;
-  }
+    /* ---------- Hero ---------- */
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 32px 80px;
+    }
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 82px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      max-width: 12ch;
+      margin-bottom: 32px;
+    }
+    .hero p {
+      font-size: 20px;
+      line-height: 1.8;
+      color: #4b4b4b;
+      max-width: 34em;
+      margin-bottom: 24px;
+    }
+    .hero .exam-tags {
+      font-size: 16px;
+      color: #666666;
+      margin-top: 8px;
+      letter-spacing: 0.01em;
+    }
+    .hero .cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
 
-  .hero .stores{
-    font-size:16px;
-    color:var(--gray-600);
-    margin-bottom:56px;
-  }
+    /* ---------- Sections ---------- */
+    section.block {
+      padding: 140px 32px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    section.block .inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    section.block h2 {
+      font-size: clamp(32px, 5vw, 46px);
+      font-weight: 650;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    section.block p {
+      font-size: 20px;
+      line-height: 1.8;
+      color: #4b4b4b;
+      max-width: 34em;
+      margin-bottom: 24px;
+    }
+    section.block p:last-child { margin-bottom: 0; }
 
-  .hero .exams{
-    font-size:17px;
-    font-weight:600;
-    letter-spacing:.06em;
-    color:var(--gray-900);
-    padding-top:36px;
-    border-top:1px solid var(--gray-200);
-  }
+    /* ---------- Download CTA ---------- */
+    .download {
+      background: #f8f8f8;
+      padding: 140px 32px;
+      text-align: center;
+    }
+    .download .inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .download h2 {
+      font-size: clamp(40px, 6vw, 56px);
+      font-weight: 650;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .download p {
+      font-size: 20px;
+      color: #4b4b4b;
+      max-width: 34em;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .download .cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-  /* ---------- Section shell ---------- */
-  section.block{
-    border-top:1px solid var(--gray-200);
-    padding:96px 24px;
-  }
-  section.block .inner{
-    max-width:720px;
-    margin:0 auto;
-    text-align:center;
-  }
+    /* ---------- Footer ---------- */
+    footer {
+      background: #f8f8f8;
+      padding: 48px 32px 40px;
+      border-top: 1px solid #eeeeee;
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 32px;
+      font-size: 15px;
+      color: #444444;
+    }
+    .footer-nav a:hover { color: #000000; }
+    .footer-meta {
+      font-size: 14px;
+      color: #888888;
+      width: 100%;
+      margin-top: 16px;
+      text-align: center;
+    }
 
-  section.block .subtitle{
-    font-size:17px;
-    font-weight:600;
-    color:var(--gray-400);
-    margin-bottom:10px;
-  }
+    /* ---------- Responsive ---------- */
+    @media (max-width: 720px) {
+      header { padding: 20px 20px 12px; }
+      .hero { padding: 60px 20px 40px; }
+      section.block { padding: 80px 20px; }
+      .download { padding: 80px 20px; }
 
-  section.block h2{
-    font-size:clamp(32px,5vw,46px);
-    font-weight:700;
-    letter-spacing:-0.02em;
-    line-height:1.14;
-    margin-bottom:28px;
-  }
+      .top-nav {
+        display: none;
+        flex-direction: column;
+        gap: 16px;
+        background: #ffffff;
+        padding: 24px 20px;
+        position: absolute;
+        top: 72px;
+        left: 20px;
+        right: 20px;
+        border-radius: 16px;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+        border: 1px solid #f0f0f0;
+      }
+      .top-nav.open { display: flex; }
+      .nav-toggle { display: flex; }
 
-  section.block p{
-    font-size:19px;
-    color:var(--gray-600);
-    max-width:56ch;
-    margin:0 auto;
-  }
-
-  section.block p + p{
-    margin-top:20px;
-  }
-
-  /* ---------- Download CTA ---------- */
-  .download{
-    background:var(--black);
-    color:var(--white);
-    text-align:center;
-    padding:110px 24px;
-  }
-  .download h2{
-    font-size:clamp(36px,6vw,56px);
-    font-weight:700;
-    letter-spacing:-0.02em;
-    line-height:1.1;
-    margin-bottom:40px;
-  }
-  .download .cta-row{
-    display:flex;
-    justify-content:center;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  .download .btn-solid{
-    background:var(--white);
-    color:var(--black);
-    border-color:var(--white);
-  }
-  .download .btn-solid:hover{ background:var(--gray-100); }
-  .download .btn-outline{
-    background:transparent;
-    color:var(--white);
-    border-color:var(--white);
-  }
-  .download .btn-outline:hover{ background:rgba(255,255,255,.08); }
-
-  footer{ background:var(--black); border-top:1px solid #262626; }
-  footer .footer-meta, footer .footer-nav a{ color:#9a9a9a; }
-  footer .footer-nav a:hover{ color:var(--white); }
-  footer .logo{ color:var(--white); }
-  footer .logo::before{ background:var(--white); }
-</style>
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .footer-nav { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
 
+<!-- Header -->
 <header>
   <div class="header-inner">
     <a href="index.html" class="logo">PrepHooks</a>
     <nav class="top-nav" id="topNav">
-      <a href="index.html" class="active">Home</a>
       <a href="help.html">Help</a>
       <a href="legal.html">Legal</a>
+      <a href="#download" class="nav-cta">Download</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span></button>
   </div>
 </header>
 
-<!-- 1. Hero -->
+<!-- Hero -->
 <div class="hero">
-  <div class="brand-eyebrow">PrepHooks</div>
-  <h1>Boost your score! with Fun, Focused &amp; Adaptive Experience</h1>
+  <h1>Learn the way your brain remembers.</h1>
+  <p>PrepHooks helps you prepare for high-stakes exams through active recall, adaptive practice, and continuous feedback.</p>
+  <p class="exam-tags">Built for JAMB · WAEC · NECO · NMCN · MDCN</p>
   <div class="cta-row">
-    <a href="#download" class="btn btn-solid">Get Started</a>
+    <a href="#download" class="btn">Download PrepHooks</a>
   </div>
-  <div class="available">Available On</div>
-  <div class="stores">App Store · Play Store</div>
-  <div class="exams">JAMB · WAEC · NMCN · MDCN · NECO</div>
 </div>
 
-<!-- 2. Guided Experience Intro -->
+<!-- 1. Learn through retrieval -->
 <section class="block">
   <div class="inner">
-    <h2>A guided, exam-driven experience.<br>Made just for you.</h2>
+    <h2>Learn through retrieval.</h2>
+    <p>Most students spend too much time rereading notes. PrepHooks replaces passive revision with deliberate practice that strengthens memory every time you answer a question. Every session reveals what you know, what you've forgotten, and what deserves your attention next.</p>
   </div>
 </section>
 
-<!-- 3. Fun, Without the Fatigue -->
+<!-- 2. Progress becomes visible -->
 <section class="block">
   <div class="inner">
-    <div class="subtitle">Fun, Without the Fatigue</div>
-    <h2>Practice that feels rewarding, not exhausting.</h2>
-    <p>PrepHooks turns exam prep into game-like practice — smart challenges, instant feedback, bite-sized questions. It's built to feel rewarding, not exhausting.</p>
+    <h2>Progress becomes visible.</h2>
+    <p>Learning shouldn't feel random. Your progress is measured continuously so you always understand your strengths, your weak areas, and where to focus before your exam.</p>
   </div>
 </section>
 
-<!-- 4. Designed for Your Growth & Confidence -->
+<!-- 3. Designed to stay out of your way -->
 <section class="block">
   <div class="inner">
-    <div class="subtitle">Designed for</div>
-    <h2>Your Growth &amp; Confidence</h2>
-    <p>PrepHooks is built with a simple design philosophy: zero friction, total focus. We engineered every screen with a clean, distraction-free aesthetic so your energy goes entirely into learning.</p>
-    <p>Everything centers on bite-sized lessons and question-first practice — giving you quick, frequent wins that steadily build real exam confidence. Paired with daily accountability loops and clear progress tracking, you always know exactly where you stand and what to master next.</p>
+    <h2>Designed to stay out of your way.</h2>
+    <p>A learning tool shouldn't compete for your attention. Every screen is intentionally minimal. Clean typography, generous spacing, and thoughtful interactions help you focus entirely on the questions in front of you.</p>
   </div>
 </section>
 
-<!-- 5. Engineered for the Score -->
+<!-- 4. Effective learning depends on retrieval -->
 <section class="block">
   <div class="inner">
-    <div class="subtitle">Engineered for</div>
-    <h2>the Score</h2>
-    <p>High scores aren't built on passive reading — they are built through active recall.</p>
-    <p>Our team studied the exact failure points of test-takers and translated those findings into the PrepHooks core algorithm. Under the hood, the system continuously isolates your knowledge gaps and forces your brain to retrieve answers under exam-like conditions. We don't measure time spent; we measure recall accuracy. That is how we turn everyday practice into predictable exam results.</p>
+    <h2>Practice that adapts to you.</h2>
+    <p>Effective learning depends on retrieval, not repetition. PrepHooks adapts each practice session based on what you've already mastered and where you're struggling, helping you spend more time on what matters most.</p>
   </div>
 </section>
 
-<!-- 6. Download CTA -->
+<!-- Download CTA -->
 <div class="download" id="download">
-  <h2>Get PrepHooks.<br>In your pocket.</h2>
-  <div class="cta-row">
-    <a href="#" class="btn btn-solid">Get it on Google Play</a>
-    <a href="#" class="btn btn-outline">Download on the App Store</a>
+  <div class="inner">
+    <h2>Ready when you are.</h2>
+    <p>Download PrepHooks and start preparing with focused, adaptive practice.</p>
+    <div class="cta-row">
+      <a href="#" class="btn">Get it on Google Play</a>
+      <a href="#" class="btn btn-outline">Download on the App Store</a>
+    </div>
   </div>
 </div>
 
+<!-- Footer -->
 <footer>
   <div class="footer-inner">
-    <a href="index.html" class="logo">PrepHooks</a>
+    <a href="index.html" class="logo" style="font-size:18px;">PrepHooks</a>
     <nav class="footer-nav">
       <a href="help.html">Help</a>
       <a href="legal.html">Legal</a>
