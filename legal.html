@@ -1,400 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Legal & About — PrepHooks</title>
-<link rel="stylesheet" href="style.css">
-<style>
-  .hero{
-    max-width:960px;
-    margin:0 auto;
-    padding:88px 24px 56px;
-  }
-  .hero .eyebrow{
-    font-size:16px;
-    font-weight:600;
-    color:var(--gray-400);
-    margin-bottom:20px;
-  }
-  .hero h1{
-    font-size:clamp(38px,6vw,58px);
-    font-weight:700;
-    letter-spacing:-0.03em;
-    line-height:1.08;
-    max-width:14ch;
-  }
-  .hero p{
-    margin-top:22px;
-    max-width:56ch;
-    font-size:19px;
-    color:var(--gray-600);
-  }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal & Privacy — PrepHooks</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Additional page-specific tweaks */
+        .hero {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 88px 24px 56px;
+        }
+        .hero .eyebrow {
+            font-size: 16px;
+            font-weight: 600;
+            color: #888888;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 58px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+            max-width: 14ch;
+        }
+        .hero p {
+            margin-top: 22px;
+            max-width: 56ch;
+            font-size: 19px;
+            color: #666666;
+        }
 
-  .subnav{
-    border-top:1px solid var(--gray-200);
-    border-bottom:1px solid var(--gray-200);
-    position:sticky;
-    top:81px;
-    background:var(--white);
-    z-index:40;
-  }
-  .subnav .inner{
-    max-width:960px;
-    margin:0 auto;
-    padding:16px 24px;
-    display:flex;
-    gap:28px;
-    overflow-x:auto;
-  }
-  .subnav a{
-    font-size:15px;
-    font-weight:600;
-    color:var(--gray-600);
-    text-decoration:none;
-    white-space:nowrap;
-  }
-  .subnav a:hover, .subnav a.active{ color:var(--black); }
+        .subnav {
+            border-top: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
+            position: sticky;
+            top: 81px;
+            background: #ffffff;
+            z-index: 40;
+        }
+        .subnav .inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            gap: 28px;
+            overflow-x: auto;
+        }
+        .subnav a {
+            font-size: 15px;
+            font-weight: 600;
+            color: #888888;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .subnav a:hover,
+        .subnav a.active {
+            color: #1a1a1a;
+        }
 
-  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+        .wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-  section.doc{
-    padding:80px 0;
-    border-bottom:1px solid var(--gray-200);
-    scroll-margin-top:150px;
-  }
-  section.doc:last-of-type{ border-bottom:none; }
+        section.doc {
+            padding: 80px 0;
+            border-bottom: 1px solid #eeeeee;
+            scroll-margin-top: 150px;
+        }
+        section.doc:last-of-type {
+            border-bottom: none;
+        }
 
-  .doc-label{
-    font-size:15px;
-    font-weight:600;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--gray-400);
-    margin-bottom:14px;
-  }
+        .doc-label {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #888888;
+            margin-bottom: 14px;
+        }
 
-  .doc h2{
-    font-size:clamp(30px,4.5vw,40px);
-    font-weight:700;
-    letter-spacing:-0.02em;
-    margin-bottom:8px;
-  }
+        .doc h2 {
+            font-size: clamp(30px, 4.5vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
 
-  .doc .effective{
-    font-size:15px;
-    color:var(--gray-400);
-    margin-bottom:48px;
-  }
+        .doc .effective {
+            font-size: 15px;
+            color: #888888;
+            margin-bottom: 48px;
+        }
 
-  .doc h3{
-    font-size:20px;
-    font-weight:700;
-    letter-spacing:-0.01em;
-    margin:44px 0 16px;
-  }
+        .doc h3 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin: 44px 0 16px;
+        }
 
-  .doc h3 .num{
-    color:var(--gray-400);
-    margin-right:10px;
-    font-weight:600;
-  }
+        .doc h3 .num {
+            color: #888888;
+            margin-right: 10px;
+            font-weight: 600;
+        }
 
-  .doc p{
-    font-size:17px;
-    color:var(--gray-900);
-    margin-bottom:18px;
-  }
+        .doc p {
+            font-size: 17px;
+            color: #1a1a1a;
+            margin-bottom: 18px;
+        }
 
-  .doc p.emphasis{
-    font-weight:700;
-    font-size:16px;
-    letter-spacing:.01em;
-  }
+        .doc p.emphasis {
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.01em;
+        }
 
-  .doc ul, .doc ol{
-    margin:0 0 18px 24px;
-  }
+        .doc ul,
+        .doc ol {
+            margin: 0 0 18px 24px;
+        }
 
-  .doc li{
-    font-size:17px;
-    color:var(--gray-900);
-    margin-bottom:10px;
-  }
+        .doc li {
+            font-size: 17px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
 
-  .doc strong{ font-weight:700; }
+        /* ----- UNDERLINED KEYWORDS (instead of bold) ----- */
+        .doc u,
+        .doc .underline {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1.5px;
+            font-weight: 500;
+        }
 
-  .about-lead{
-    font-size:23px;
-    font-weight:500;
-    letter-spacing:-0.01em;
-    max-width:44ch;
-    margin-bottom:40px;
-  }
+        /* Keep bold only for very specific emphasis, but prefer underline */
+        .doc strong {
+            font-weight: 600;
+        }
 
-  .feature-list{
-    display:grid;
-    gap:34px;
-    margin:36px 0 8px;
-  }
-  .feature-list .feature-title{
-    font-weight:700;
-    font-size:18px;
-    margin-bottom:6px;
-  }
-  .feature-list .feature-body{
-    font-size:17px;
-    color:var(--gray-600);
-    max-width:60ch;
-  }
+        /* List item leading keywords — underlined */
+        .doc li u,
+        .doc li .underline {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1.5px;
+            font-weight: 500;
+        }
 
-  .kicker-line{
-    margin-top:48px;
-    font-size:26px;
-    font-weight:700;
-    letter-spacing:-0.02em;
-    border-top:1px solid var(--gray-200);
-    padding-top:36px;
-  }
-</style>
+        /* Ensure footer styling from style.css is used */
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <a href="index.html" class="logo">PrepHooks</a>
-    <nav class="top-nav" id="topNav">
-      <a href="index.html">Home</a>
-      <a href="help.html">Help</a>
-      <a href="legal.html" class="active">Legal</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span></button>
-  </div>
-</header>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">PrepHooks</a>
+            <nav class="top-nav" id="topNav">
+                <a href="index.html">Home</a>
+                <a href="help.html">Help</a>
+                <a href="legal.html" class="active">Legal</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
 
-<div class="hero">
-  <div class="eyebrow">Legal</div>
-  <h1>Terms, policies &amp; who we are</h1>
-  <p>Our Terms of Service, Payment Terms, Privacy Policy, and a bit about PrepHooks — all in one place.</p>
-</div>
-
-<div class="subnav">
-  <div class="inner">
-    <a href="#terms">Terms</a>
-    <a href="#payment">Payment</a>
-    <a href="#privacy">Privacy</a>
-    <a href="#about">About</a>
-  </div>
-</div>
-
-<div class="wrap">
-
-  <!-- ============ TERMS OF SERVICE ============ -->
-  <section class="doc" id="terms">
-    <div class="doc-label">Legal · 01</div>
-    <h2>Terms of Service</h2>
-    <div class="effective">Effective date: July 2026</div>
-
-    <p>The following terms and conditions (the "Agreement") govern all access to and use of the PrepHooks mobile applications, web platforms, APIs, software, and any products, tools, content, or services made available by PrepHooks ("PrepHooks," "we," "us," or "our") (collectively, the "Service").</p>
-    <p>By creating an account, downloading, accessing, or using any part of the Service, you ("User" or "you") unconditionally agree to be bound by all of the terms and conditions contained herein, as well as all operating rules, policies, and procedures published from time to time on the Service.</p>
-    <p class="emphasis">If you do not agree to all of these terms, you are strictly prohibited from accessing or using the Service.</p>
-    <p>PrepHooks reserves the right, at its sole discretion, to modify, update, or replace any part of this Agreement at any time by updating this document within the Service or by notifying you via email or in-app notification. Your continued use of the Service following the posting of modifications constitutes binding acceptance of those changes.</p>
-
-    <h3><span class="num">1.</span>Eligibility and account registration</h3>
-    <ul>
-      <li><strong>General age eligibility.</strong> You certify that you are legally permitted to use the Service. If you are under 18 years of age (or under the legal age of majority in your jurisdiction), you may only access the Service under the active supervision and explicit consent of a parent or legal guardian who agrees to be bound by this Agreement.</li>
-      <li><strong>Account integrity.</strong> To access certain features of the Service — including saved progress (PrepMap), test logs, practice diagnostic analytics, and paid content tiers — you must register for an account. You agree to provide accurate, complete, and current registration information and to update it immediately upon change.</li>
-      <li><strong>Account security.</strong> You are solely responsible for maintaining the confidentiality of your credentials and for all activities under your account. Accounts are personal, individual, and strictly non-transferable. PrepHooks reserves the right to suspend or terminate any account suspected of unauthorized credential sharing.</li>
-    </ul>
-
-    <h3><span class="num">2.</span>Intellectual property rights and content restrictions</h3>
-    <ul>
-      <li><strong>Ownership of proprietary assets.</strong> The Service, including all question banks, diagnostic items, active recall modules, test rationales, curriculum structures, lesson content, software architecture, UI/UX components, graphics, micro-interactions, brand assets, and logos, is the exclusive intellectual property of PrepHooks and its licensors.</li>
-      <li><strong>Limited license.</strong> Subject to your strict compliance with this Agreement and payment of applicable fees, PrepHooks grants you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use the Service solely for your personal, non-commercial, educational preparation.</li>
-      <li><strong>Restrictions on use.</strong> You expressly agree that you will not, directly or indirectly:
-        <ol>
-          <li>Copy, reproduce, modify, translate, adapt, or create derivative works of any question, lesson, rationale, or software component on the Service.</li>
-          <li>Reverse engineer, decompile, disassemble, or extract source code, underlying algorithms, or database schemas from the Service.</li>
-          <li>Use automated bots, scrapers, crawlers, data-mining tools, or extraction scripts to harvest content, questions, or analytics from the Service.</li>
-          <li>Redistribute, sell, rent, lease, syndicate, broadcast, or sublicense any part of the Service or its contents to third parties, educational centers, or institutional study groups without explicit written authorization from PrepHooks.</li>
-          <li>Circumvent, disable, or interfere with security features or digital rights management mechanisms within the app.</li>
-        </ol>
-      </li>
-    </ul>
-
-    <h3><span class="num">3.</span>Service availability and modifications</h3>
-    <p>PrepHooks continuously improves its educational delivery. We reserve the right, at our sole discretion, to modify, update, suspend, or discontinue any aspect of the Service — including any specific topic, practice module, lesson count, database structure, feature, or tool — at any time without prior liability. We may also impose limits on certain features or restrict access to parts of the Service for system maintenance, content upgrades, or security enhancements.</p>
-
-    <h3><span class="num">4.</span>Medical and licensure disclaimer</h3>
-    <p>The Service provides diagnostic active recall practice tools designed to assist candidates in preparing for standardized examinations (including Nursing, Midwifery, and other professional licensure exams).</p>
-    <ul>
-      <li><strong>No educational guarantee.</strong> While our material is crafted to align with published syllabi, PrepHooks does not guarantee exam passage, professional licensing, or specific test scores.</li>
-      <li><strong>Not professional medical advice.</strong> Content provided within PrepHooks — including question rationales, clinical scenario simulations, and medical explanations — is strictly for academic and examination preparation purposes. It does not constitute medical advice, diagnosis, or clinical practice guidelines.</li>
-    </ul>
-
-    <h3><span class="num">5.</span>Disclaimer of warranties</h3>
-    <p>The Service and all included content are provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. To the fullest extent permissible under applicable law, PrepHooks disclaims all warranties, express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, title, non-infringement, and uninterrupted or error-free operation.</p>
-
-    <h3><span class="num">6.</span>Limitation of liability</h3>
-    <p>To the maximum extent permitted by applicable law, in no event shall PrepHooks, its founders, directors, employees, affiliates, or licensors be liable for any indirect, incidental, consequential, special, or punitive damages (including loss of data, loss of profit, exam failure costs, or service interruption) arising out of or in connection with your use of, or inability to use, the Service. In no event shall PrepHooks' total aggregate liability exceed the total amount paid by you to PrepHooks in the six (6) months preceding the claim.</p>
-
-    <h3><span class="num">7.</span>Termination</h3>
-    <p>PrepHooks reserves the right to suspend or terminate your account and revoke your access to the Service immediately, without prior notice or liability, if you breach any provision of this Agreement, engage in fraudulent payment activity, or misuse platform content. Upon termination, your right to use the Service immediately ceases, and all licenses granted hereunder are revoked.</p>
-
-    <h3><span class="num">8.</span>Governing law and dispute resolution</h3>
-    <p>This Agreement shall be governed by and construed in accordance with applicable laws. Any dispute, claim, or controversy arising out of or relating to this Agreement, including the determination of the scope or applicability of this agreement to arbitrate, shall be settled through binding individual arbitration or resolved in competent courts, without resorting to class-action proceedings.</p>
-  </section>
-
-  <!-- ============ PAYMENT TERMS ============ -->
-  <section class="doc" id="payment">
-    <div class="doc-label">Legal · 02</div>
-    <h2>Payment Terms</h2>
-    <div class="effective">Effective date: July 2026</div>
-
-    <h3><span class="num">1.</span>General payment &amp; subscription terms</h3>
-    <p>Access to certain premium practice modules, high-yield question databases, diagnostic engines, and complete lesson sets on PrepHooks requires paid access ("Paid Content" or "Subscription"). By purchasing Paid Content, you agree to these Payment Terms.</p>
-
-    <h3><span class="num">2.</span>Billing and charges</h3>
-    <ul>
-      <li><strong>Pricing &amp; taxes.</strong> Fees for access tiers are displayed within the application prior to purchase. All charges are billed upfront in the indicated currency. You are responsible for all applicable local, sales, value-added (VAT), or transaction taxes associated with your purchase.</li>
-      <li><strong>Payment processing.</strong> Payments are processed securely via our integrated third-party payment gateways. PrepHooks does not directly collect or store complete debit/credit card numbers on its servers. By initiating a transaction, you authorize PrepHooks and its payment processors to charge your selected payment method for the agreed amount.</li>
-      <li><strong>Billing accuracy.</strong> You agree to maintain current, complete, and accurate billing and account information.</li>
-    </ul>
-
-    <h3><span class="num">3.</span>Access duration and state persistence</h3>
-    <ul>
-      <li><strong>Expiration dates.</strong> Upon verified payment confirmation, access to the specified Paid Content is activated immediately and bound to your user account state in our database. Your access remains valid until the explicitly stated expiration date recorded in your user profile state.</li>
-      <li><strong>Access continuity.</strong> Active subscriptions allow unlimited practice and active recall retrieval loops within the designated module during your access window. Once the recorded expiration date passes, access to Paid Content automatically locks until renewed.</li>
-    </ul>
-
-    <h3><span class="num">4.</span>Refund and cancellation policy</h3>
-    <p><strong>Non-refundable digital goods.</strong> Due to the immediate digital delivery and instant access granted to intellectual property (including question banks, rationales, and diagnostic solutions), all purchases are final, non-refundable, and non-creditable, except as required by law or explicitly provided herein.</p>
-    <p><strong>Transaction &amp; technical errors.</strong> If you encounter a duplicate charge, payment deduction without access activation, or an error during payment processing:</p>
-    <ol>
-      <li>Pull down to refresh your app state on the main dashboard.</li>
-      <li>If the problem persists, submit a request via <strong>Profile → Report a Problem</strong> or contact <strong>support@prephooks.com</strong> with your payment reference and account email. Valid technical errors will be rectified immediately via manual entitlement activation or transaction correction.</li>
-    </ol>
-
-    <h3><span class="num">5.</span>Price modifications</h3>
-    <p>PrepHooks reserves the right to modify pricing, subscription durations, or introduce new paid tiers at any time. Any price changes will apply only to subsequent purchases or renewals and will not affect currently active, prepaid access periods.</p>
-  </section>
-
-  <!-- ============ PRIVACY POLICY ============ -->
-  <section class="doc" id="privacy">
-    <div class="doc-label">Legal · 03</div>
-    <h2>Privacy Policy</h2>
-    <div class="effective">Effective date: July 2026</div>
-
-    <h3><span class="num">1.</span>Introduction</h3>
-    <p>PrepHooks ("we," "us," or "our") respects your personal privacy. This Privacy Policy explains how we collect, use, store, sync, and safeguard your personal information when you use our mobile application and related services (the "Service").</p>
-
-    <h3><span class="num">2.</span>Information we collect</h3>
-    <p>We collect data to provide, optimize, and personalize your question-first learning experience:</p>
-    <ul>
-      <li><strong>Account &amp; identity information:</strong> Name, email address, profile handle, profile photo, and password credentials provided during account creation.</li>
-      <li><strong>Learning diagnostics &amp; progress data:</strong> Question response accuracy, active recall retrieval performance, completed topics and lessons, practice test timestamps, study streaks, score distribution, and overall PrepMap progress metrics.</li>
-      <li><strong>Subscription &amp; access state data:</strong> Payment confirmation metadata, active subscription status, purchase history, and subscription expiration dates synced to our backend database.</li>
-      <li><strong>Device &amp; application preferences:</strong> Application settings (such as dark/light theme preferences, haptic/vibration toggles, and sound settings), operating system version, unique device identifiers, hardware model, and system log files.</li>
-    </ul>
-
-    <h3><span class="num">3.</span>How we use your information</h3>
-    <ol>
-      <li><strong>To deliver core services:</strong> To authenticate your account, maintain state persistence, track learning progress across sessions, and enforce active subscription entitlements.</li>
-      <li><strong>To optimize learning diagnostics:</strong> To calculate personalized active recall algorithms, identify weak syllabus areas, and present targeted revision prompts.</li>
-      <li><strong>To process payments:</strong> To verify payment gateway webhooks, confirm purchase status, and set accurate expiration state dates.</li>
-      <li><strong>To improve &amp; maintain the platform:</strong> To monitor system performance, fix bugs, refine micro-interactions/UI response times, and prevent fraud or abusive credential sharing.</li>
-      <li><strong>To communicate:</strong> To send administrative notifications, password reset links, account status alerts, and support responses.</li>
-    </ol>
-
-    <h3><span class="num">4.</span>Data sharing and disclosure</h3>
-    <p class="emphasis">PrepHooks does not sell, rent, or trade your personal data to third parties or advertisers.</p>
-    <p>We share data only under the following limited circumstances:</p>
-    <ul>
-      <li><strong>Third-party service providers.</strong> We partner with trusted infrastructure and service providers — such as cloud database providers, authentication services, and payment processors — solely to run the application. These providers are bound by strict confidentiality obligations.</li>
-      <li><strong>Legal compliance.</strong> We may disclose your information if required to do so by law, court order, or governmental regulation, or if we believe in good faith that disclosure is necessary to protect the rights, property, or safety of PrepHooks, our users, or the public.</li>
-      <li><strong>Business transfers.</strong> In the event of a merger, acquisition, restructuring, or asset sale, user account state and associated data may be transferred as a core business asset under equivalent privacy protections.</li>
-    </ul>
-
-    <h3><span class="num">5.</span>Data storage and security</h3>
-    <p>Your learning state, analytics, and account data are securely stored and synced using industry-standard database protocols. We enforce technical and administrative safeguards — including encryption in transit (TLS) and restricted database access controls — to protect your personal information against loss, theft, unauthorized access, or alteration.</p>
-
-    
-    <h3><span class="num">6.</span>Your data rights &amp; controls</h3>
-    <ul>
-      <li><strong>Profile management.</strong> You can review, edit, or update your personal details (such as your name and email) anytime from the account settings screen in the app.</li>
-      <li><strong>App preferences.</strong> You can toggle UI features — including haptic feedback vibrations, audio sound effects, and theme preferences — directly on your profile tab.</li>
-      <li><strong>Account deletion.</strong> You have the right to request full account deletion and erasure of your performance history by submitting a request through Report a Problem or emailing <strong>privacy@prephooks.com</strong>.</li>
-    </ul>
-
-    <h3><span class="num">7.</span>Revisions to this privacy policy</h3>
-    <p>We may update this Privacy Policy periodically to reflect app updates, new legal requirements, or service modifications. Changes will be posted with an updated "Effective Date." Continued use of PrepHooks after updates indicates acceptance of the revised privacy terms.</p>
-  </section>
-
-  <!-- ============ ABOUT US ============ -->
-  <section class="doc" id="about">
-    <div class="doc-label">Company · 04</div>
-    <h2>About us</h2>
-
-    <p class="about-lead">Question-first mastery for high-stakes exams.</p>
-
-    <p>PrepHooks is an advanced, active-recall learning platform built to help candidates master high-stakes professional and academic examinations.</p>
-
-    <h3>The philosophy: active recall over passive reading</h3>
-    <p>Traditional exam preparation relies heavily on passive textbook reading — a method proven to result in rapid memory decay. PrepHooks flips the learning paradigm on its head. Built around learning science, our platform utilizes a question-first diagnostic engine.</p>
-
-    <div class="feature-list">
-      <div>
-        <div class="feature-title">Targeted practice</div>
-        <div class="feature-body">Candidates dive straight into high-yield, syllabus-aligned question sets covering complex medical, licensure, and academic subjects — such as Nursing, Midwifery, and competitive entrance syllabi.</div>
-      </div>
-      <div>
-        <div class="feature-title">Deep active recall loops</div>
-        <div class="feature-body">Every question is paired with comprehensive, step-by-step rationales, forcing active memory retrieval and long-term knowledge retention.</div>
-      </div>
-      <div>
-        <div class="feature-title">Real-time diagnostics — PrepMap</div>
-        <div class="feature-body">Our state-synced analytics track topic-level performance in real time, helping users pinpoint exact knowledge gaps before exam day.</div>
-      </div>
+    <!-- ===== HERO ===== -->
+    <div class="hero">
+        <div class="eyebrow">Legal &amp; Privacy</div>
+        <h1>Terms, policies &amp; how we protect your data</h1>
+        <p>Our Terms of Service and Privacy Policy — clear, concise, and built for your peace of mind.</p>
     </div>
 
-    <h3>Built for high performance</h3>
-    <p>With zero-friction navigation, tactile haptic feedback, offline-ready state caching, and neo-minimalist mobile interfaces, PrepHooks delivers a premium, distraction-free environment engineered for modern, mobile-first learners.</p>
+    <!-- ===== STICKY SUB-NAV ===== -->
+    <div class="subnav">
+        <div class="inner">
+            <a href="#terms">Terms of Use</a>
+            <a href="#privacy">Privacy Policy</a>
+        </div>
+    </div>
 
-    <div class="kicker-line">Stop reading passively. Start mastering actively.</div>
-  </section>
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="wrap">
 
-</div>
+        <!-- ========================================================= -->
+        <!-- ============ TERMS OF SERVICE ============ -->
+        <!-- ========================================================= -->
+        <section class="doc" id="terms">
+            <div class="doc-label">Legal · 01</div>
+            <h2>Terms of Service</h2>
+            <div class="effective">Effective date: July 2026</div>
 
-<footer>
-  <div class="footer-inner">
-    <a href="index.html" class="logo">PrepHooks</a>
-    <nav class="footer-nav">
-      <a href="help.html">Help</a>
-      <a href="legal.html">Legal</a>
-    </nav>
-    <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
-  </div>
-</footer>
+            <p>Welcome to PrepHooks. By using our website, mobile app, and services (collectively, the "Service"), you agree to these Terms. If you do not agree, please do not use the Service.</p>
 
-<script>
-  const toggle = document.getElementById('navToggle');
-  const nav = document.getElementById('topNav');
-  toggle.addEventListener('click', () => nav.classList.toggle('open'));
-  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('open')));
+            <p class="emphasis">This agreement contains a binding arbitration clause and a waiver of class-action rights. Please read it carefully.</p>
 
-  const sections = document.querySelectorAll('section.doc');
-  const subLinks = document.querySelectorAll('.subnav a');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        subLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.subnav a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => observer.observe(s));
-</script>
+            <h3><span class="num">1.</span>Acceptance of Terms</h3>
+            <p><u>By accessing or using PrepHooks</u>, you agree to be bound by these Terms and our <a href="#privacy">Privacy Policy</a>. We may update these Terms from time to time. Your continued use after changes are posted constitutes your acceptance.</p>
+
+            <h3><span class="num">2.</span>Eligibility</h3>
+            <p><u>You must be at least 13 years old</u> to use the Service. If you are between 13 and 18, you confirm that you have parental or guardian consent. We comply with applicable data protection laws, including COPPA and GDPR, where required.</p>
+
+            <h3><span class="num">3.</span>Your Account</h3>
+            <p><u>You are responsible</u> for maintaining the confidentiality of your account credentials and for all activity under your account. Notify us immediately at <a href="mailto:support@prephooks.com">support@prephooks.com</a> of any unauthorized use.</p>
+
+            <h3><span class="num">4.</span>Subscription &amp; Payments</h3>
+            <p>PrepHooks offers both free and paid subscription plans. By purchasing a subscription, you agree to the following:</p>
+            <ul>
+                <li><u>Billing:</u> We charge your selected payment method on a recurring basis (e.g., monthly or annually) as indicated at checkout.</li>
+                <li><u>Automatic Renewal:</u> Your subscription will auto-renew at the end of each period unless you cancel at least <strong>1 business day</strong> before the renewal date. You can cancel anytime via your account settings or by emailing <a href="mailto:support@prephooks.com">support@prephooks.com</a>.</li>
+                <li><u>Refunds:</u> All payments are non-refundable, except as required by law. We do not offer partial refunds for unused periods.</li>
+                <li><u>Price Changes:</u> We may change our prices with notice. Continued use after a price change constitutes acceptance.</li>
+            </ul>
+
+            <h3><span class="num">5.</span>Content &amp; License</h3>
+            <p><u>All content provided through PrepHooks</u> (lessons, questions, explanations, readiness scores, etc.) is owned by us or our licensors and is protected by copyright and other laws. We grant you a personal, non-exclusive, non-transferable license to use the Service for your personal, non-commercial exam preparation.</p>
+            <p><u>You may not copy, distribute, modify, scrape</u>, or create derivative works from our content without our prior written consent. This includes using our content to train any AI or machine learning models.</p>
+
+            <h3><span class="num">6.</span>User Content &amp; AI Features</h3>
+            <p><u>You may submit feedback, comments, or other materials</u> ("User Content"). By submitting User Content, you grant PrepHooks a worldwide, royalty-free license to use, modify, and display it to operate and improve the Service.</p>
+            <p><u>Our Service includes AI-powered features</u> that provide personalized explanations and study guidance. These outputs are for informational purposes only and should not be relied upon as professional advice. We are constantly improving our AI, but we do not guarantee its accuracy or completeness.</p>
+
+            <h3><span class="num">7.</span>Acceptable Use</h3>
+            <p>You agree not to:</p>
+            <ul>
+                <li><u>Use the Service</u> for any unlawful purpose or in violation of any applicable law.</li>
+                <li><u>Post or transmit</u> any harmful, defamatory, obscene, or otherwise objectionable content.</li>
+                <li><u>Attempt to gain</u> unauthorized access to any part of the Service.</li>
+                <li><u>Use automated means</u> (e.g., bots, scrapers) to access or collect data from the Service.</li>
+                <li><u>Impersonate</u> any person or entity.</li>
+            </ul>
+
+            <h3><span class="num">8.</span>Termination</h3>
+            <p><u>We may suspend or terminate</u> your account at any time, with or without notice, if we believe you have violated these Terms. Upon termination, your right to use the Service will cease.</p>
+
+            <h3><span class="num">9.</span>No Warranty</h3>
+            <p><u>The Service is provided</u> on an "as is" and "as available" basis. PrepHooks makes no warranties, express or implied, regarding the Service's accuracy, reliability, or fitness for a particular purpose. Your use is at your own risk.</p>
+
+            <h3><span class="num">10.</span>Limitation of Liability</h3>
+            <p><u>To the fullest extent permitted by law</u>, PrepHooks and its affiliates shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service. Our total liability to you for any claim shall not exceed the amount you paid us in the preceding 12 months, or $50 (USD), whichever is greater.</p>
+
+            <h3><span class="num">11.</span>Indemnification</h3>
+            <p><u>You agree to defend, indemnify, and hold harmless</u> PrepHooks from any claims, damages, or expenses arising from your use of the Service, your User Content, or your violation of these Terms.</p>
+
+            <h3><span class="num">12.</span>Dispute Resolution</h3>
+            <p><u>Most concerns can be resolved quickly</u> by emailing us at <a href="mailto:support@prephooks.com">support@prephooks.com</a>. If a dispute remains, we both agree to resolve it through binding arbitration conducted by the Lagos Multi-Door Courthouse (LMDC) or a similar recognized arbitration body in Nigeria, in accordance with the Arbitration and Conciliation Act, Cap A18, Laws of the Federation of Nigeria, 2004.</p>
+            <p><u>The arbitration will be conducted</u> on an individual basis. You waive your right to participate in a class action or class arbitration.</p>
+
+            <h3><span class="num">13.</span>Governing Law</h3>
+            <p><u>These Terms shall be governed</u> by and construed in accordance with the laws of the Federal Republic of Nigeria. Any legal proceedings shall be brought in the courts of Lagos State.</p>
+
+            <h3><span class="num">14.</span>Contact &amp; DMCA</h3>
+            <p>If you have questions about these Terms, please contact us at:</p>
+            <p>
+                <strong>PrepHooks Nigeria Limited</strong><br />
+                [Insert Your Business Address]<br />
+                Email: <a href="mailto:support@prephooks.com">support@prephooks.com</a>
+            </p>
+            <p><u>If you believe content</u> on our Service infringes your copyright, please send a notice to our designated agent at the address above, including the required information under the Nigerian Copyright Act (or the DMCA for US-based claims).</p>
+
+            <h3><span class="num">15.</span>Miscellaneous</h3>
+            <p><u>If any provision</u> of these Terms is found to be unenforceable, the remaining provisions will remain in full force. These Terms constitute the entire agreement between you and PrepHooks.</p>
+
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- ============ PRIVACY POLICY ============ -->
+        <!-- ========================================================= -->
+        <section class="doc" id="privacy">
+            <div class="doc-label">Privacy · 02</div>
+            <h2>Privacy Policy</h2>
+            <div class="effective">Effective date: July 2026</div>
+
+            <p>PrepHooks ("we," "us," or "our") respects your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use our Service.</p>
+
+            <h3><span class="num">1.</span>Information We Collect</h3>
+            <p>We collect data to provide, optimize, and personalize your learning experience:</p>
+            <ul>
+                <li><u>Account &amp; Identity:</u> Name, email address, and profile information you provide during registration.</li>
+                <li><u>Learning &amp; Performance Data:</u> Your responses to questions, lesson progress, test scores, study streaks, and topic-level proficiency metrics.</li>
+                <li><u>Payment &amp; Subscription Data:</u> Purchase confirmations, subscription status, and expiration dates (we do not store full credit card numbers).</li>
+                <li><u>Device &amp; Usage Data:</u> App preferences (theme, haptics), device model, operating system, and anonymized interaction logs to improve performance.</li>
+            </ul>
+
+            <h3><span class="num">2.</span>How We Use Your Information</h3>
+            <ol>
+                <li><u>To deliver core services:</u> Authenticate your account, track progress, and enforce subscription entitlements.</li>
+                <li><u>To personalize learning:</u> Power our adaptive practice algorithm, identify weak topics, and recommend what to study next.</li>
+                <li><u>To process payments:</u> Verify purchases and manage subscription states.</li>
+                <li><u>To improve the platform:</u> Fix bugs, optimize performance, and understand usage patterns.</li>
+                <li><u>To communicate:</u> Send important notices (password resets, service updates) and respond to support requests.</li>
+            </ol>
+
+            <h3><span class="num">3.</span>Data Sharing &amp; Disclosure</h3>
+            <p class="emphasis">PrepHooks does not sell, rent, or trade your personal data to third parties.</p>
+            <p>We share data only in these limited circumstances:</p>
+            <ul>
+                <li><u>Service Providers:</u> With trusted partners who help us operate the Service (e.g., cloud hosting, payment processing). They are bound by strict confidentiality obligations.</li>
+                <li><u>Legal Compliance:</u> If required by law, regulation, or legal process, or to protect the rights and safety of PrepHooks, our users, or the public.</li>
+                <li><u>Business Transfers:</u> In the event of a merger, acquisition, or asset sale, your data may be transferred as part of the transaction.</li>
+            </ul>
+
+            <h3><span class="num">4.</span>Data Security</h3>
+            <p><u>We implement industry-standard security measures</u>, including encryption in transit (TLS) and restricted database access, to protect your information against unauthorized access, alteration, or destruction.</p>
+
+            <h3><span class="num">5.</span>Your Rights &amp; Controls</h3>
+            <ul>
+                <li><u>Access &amp; Update:</u> You can review and edit your personal information in your account settings at any time.</li>
+                <li><u>App Preferences:</u> Manage haptic feedback, sound, and theme preferences in your profile tab.</li>
+                <li><u>Account Deletion:</u> You may request full account deletion and data erasure by emailing <a href="mailto:privacy@prephooks.com">privacy@prephooks.com</a>.</li>
+            </ul>
+
+            <h3><span class="num">6.</span>Children's Privacy</h3>
+            <p><u>Our Service is not directed</u> to children under 13. We do not knowingly collect personal information from children under 13 without parental consent. If we learn we have collected such information, we will delete it promptly. If you believe a child has provided us with personal information, please contact us.</p>
+
+            <h3><span class="num">7.</span>Changes to This Policy</h3>
+            <p><u>We may update this Privacy Policy</u> from time to time. We will notify you of significant changes by posting the new policy on this page with an updated "Effective Date." Your continued use of the Service after changes constitutes your acceptance.</p>
+
+            <h3><span class="num">8.</span>Contact Us</h3>
+            <p>If you have questions or concerns about this Privacy Policy, please reach out:</p>
+            <p>
+                <strong>PrepHooks Nigeria Limited</strong><br />
+                [Insert Your Business Address]<br />
+                Email: <a href="mailto:privacy@prephooks.com">privacy@prephooks.com</a>
+            </p>
+        </section>
+
+    </div> <!-- /wrap -->
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <a href="index.html" class="logo">PrepHooks</a>
+            <nav class="footer-nav">
+                <a href="help.html">Help</a>
+                <a href="legal.html">Legal</a>
+            </nav>
+            <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // Mobile nav toggle
+        const toggle = document.getElementById('navToggle');
+        const nav = document.getElementById('topNav');
+        if (toggle && nav) {
+            toggle.addEventListener('click', () => nav.classList.toggle('open'));
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => nav.classList.remove('open'));
+            });
+        }
+
+        // Sticky sub-nav active state
+        const sections = document.querySelectorAll('section.doc');
+        const subLinks = document.querySelectorAll('.subnav a');
+        if (sections.length && subLinks.length) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        subLinks.forEach(l => l.classList.remove('active'));
+                        const active = document.querySelector(`.subnav a[href="#${entry.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-40% 0px -55% 0px' });
+            sections.forEach(s => observer.observe(s));
+        }
+    </script>
 
 </body>
 </html>
