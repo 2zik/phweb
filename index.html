@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrepHooks — Boost Your Score</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:980px;
+    margin:0 auto;
+    padding:110px 24px 90px;
+    text-align:center;
+  }
+
+  .hero .brand-eyebrow{
+    font-size:16px;
+    font-weight:600;
+    color:var(--gray-400);
+    margin-bottom:28px;
+    letter-spacing:.02em;
+  }
+
+  .hero h1{
+    font-size:clamp(42px,7vw,72px);
+    font-weight:700;
+    letter-spacing:-0.03em;
+    line-height:1.08;
+    max-width:16ch;
+    margin:0 auto 40px;
+  }
+
+  .hero .cta-row{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+
+  .hero .available{
+    font-size:15px;
+    color:var(--gray-400);
+    font-weight:600;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+
+  .hero .stores{
+    font-size:16px;
+    color:var(--gray-600);
+    margin-bottom:56px;
+  }
+
+  .hero .exams{
+    font-size:17px;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--gray-900);
+    padding-top:36px;
+    border-top:1px solid var(--gray-200);
+  }
+
+  /* ---------- Section shell ---------- */
+  section.block{
+    border-top:1px solid var(--gray-200);
+    padding:96px 24px;
+  }
+  section.block .inner{
+    max-width:720px;
+    margin:0 auto;
+    text-align:center;
+  }
+
+  section.block .subtitle{
+    font-size:17px;
+    font-weight:600;
+    color:var(--gray-400);
+    margin-bottom:10px;
+  }
+
+  section.block h2{
+    font-size:clamp(32px,5vw,46px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.14;
+    margin-bottom:28px;
+  }
+
+  section.block p{
+    font-size:19px;
+    color:var(--gray-600);
+    max-width:56ch;
+    margin:0 auto;
+  }
+
+  section.block p + p{
+    margin-top:20px;
+  }
+
+  /* ---------- Download CTA ---------- */
+  .download{
+    background:var(--black);
+    color:var(--white);
+    text-align:center;
+    padding:110px 24px;
+  }
+  .download h2{
+    font-size:clamp(36px,6vw,56px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.1;
+    margin-bottom:40px;
+  }
+  .download .cta-row{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .download .btn-solid{
+    background:var(--white);
+    color:var(--black);
+    border-color:var(--white);
+  }
+  .download .btn-solid:hover{ background:var(--gray-100); }
+  .download .btn-outline{
+    background:transparent;
+    color:var(--white);
+    border-color:var(--white);
+  }
+  .download .btn-outline:hover{ background:rgba(255,255,255,.08); }
+
+  footer{ background:var(--black); border-top:1px solid #262626; }
+  footer .footer-meta, footer .footer-nav a{ color:#9a9a9a; }
+  footer .footer-nav a:hover{ color:var(--white); }
+  footer .logo{ color:var(--white); }
+  footer .logo::before{ background:var(--white); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">PrepHooks</a>
+    <nav class="top-nav" id="topNav">
+      <a href="index.html" class="active">Home</a>
+      <a href="help.html">Help</a>
+      <a href="legal.html">Legal</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span></button>
+  </div>
+</header>
+
+<!-- 1. Hero -->
+<div class="hero">
+  <div class="brand-eyebrow">PrepHooks</div>
+  <h1>Boost your score! with Fun, Focused &amp; Adaptive Experience</h1>
+  <div class="cta-row">
+    <a href="#download" class="btn btn-solid">Get Started</a>
+  </div>
+  <div class="available">Available On</div>
+  <div class="stores">App Store · Play Store</div>
+  <div class="exams">JAMB · WAEC · NMCN · MDCN · NECO</div>
+</div>
+
+<!-- 2. Guided Experience Intro -->
+<section class="block">
+  <div class="inner">
+    <h2>A guided, exam-driven experience.<br>Made just for you.</h2>
+  </div>
+</section>
+
+<!-- 3. Fun, Without the Fatigue -->
+<section class="block">
+  <div class="inner">
+    <div class="subtitle">Fun, Without the Fatigue</div>
+    <h2>Practice that feels rewarding, not exhausting.</h2>
+    <p>PrepHooks turns exam prep into game-like practice — smart challenges, instant feedback, bite-sized questions. It's built to feel rewarding, not exhausting.</p>
+  </div>
+</section>
+
+<!-- 4. Designed for Your Growth & Confidence -->
+<section class="block">
+  <div class="inner">
+    <div class="subtitle">Designed for</div>
+    <h2>Your Growth &amp; Confidence</h2>
+    <p>PrepHooks is built with a simple design philosophy: zero friction, total focus. We engineered every screen with a clean, distraction-free aesthetic so your energy goes entirely into learning.</p>
+    <p>Everything centers on bite-sized lessons and question-first practice — giving you quick, frequent wins that steadily build real exam confidence. Paired with daily accountability loops and clear progress tracking, you always know exactly where you stand and what to master next.</p>
+  </div>
+</section>
+
+<!-- 5. Engineered for the Score -->
+<section class="block">
+  <div class="inner">
+    <div class="subtitle">Engineered for</div>
+    <h2>the Score</h2>
+    <p>High scores aren't built on passive reading — they are built through active recall.</p>
+    <p>Our team studied the exact failure points of test-takers and translated those findings into the PrepHooks core algorithm. Under the hood, the system continuously isolates your knowledge gaps and forces your brain to retrieve answers under exam-like conditions. We don't measure time spent; we measure recall accuracy. That is how we turn everyday practice into predictable exam results.</p>
+  </div>
+</section>
+
+<!-- 6. Download CTA -->
+<div class="download" id="download">
+  <h2>Get PrepHooks.<br>In your pocket.</h2>
+  <div class="cta-row">
+    <a href="#" class="btn btn-solid">Get it on Google Play</a>
+    <a href="#" class="btn btn-outline">Download on the App Store</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="logo">PrepHooks</a>
+    <nav class="footer-nav">
+      <a href="help.html">Help</a>
+      <a href="legal.html">Legal</a>
+    </nav>
+    <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('topNav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('open')));
+</script>
+
+</body>
+</html>
