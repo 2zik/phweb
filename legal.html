@@ -318,6 +318,7 @@
     <h3><span class="num">5.</span>Data storage and security</h3>
     <p>Your learning state, analytics, and account data are securely stored and synced using industry-standard database protocols. We enforce technical and administrative safeguards — including encryption in transit (TLS) and restricted database access controls — to protect your personal information against loss, theft, unauthorized access, or alteration.</p>
 
+    
     <h3><span class="num">6.</span>Your data rights &amp; controls</h3>
     <ul>
       <li><strong>Profile management.</strong> You can review, edit, or update your personal details (such as your name and email) anytime from the account settings screen in the app.</li>
@@ -325,4 +326,75 @@
       <li><strong>Account deletion.</strong> You have the right to request full account deletion and erasure of your performance history by submitting a request through Report a Problem or emailing <strong>privacy@prephooks.com</strong>.</li>
     </ul>
 
-    <h3><span class="num">7.</span>Revisions to t
+    <h3><span class="num">7.</span>Revisions to this privacy policy</h3>
+    <p>We may update this Privacy Policy periodically to reflect app updates, new legal requirements, or service modifications. Changes will be posted with an updated "Effective Date." Continued use of PrepHooks after updates indicates acceptance of the revised privacy terms.</p>
+  </section>
+
+  <!-- ============ ABOUT US ============ -->
+  <section class="doc" id="about">
+    <div class="doc-label">Company · 04</div>
+    <h2>About us</h2>
+
+    <p class="about-lead">Question-first mastery for high-stakes exams.</p>
+
+    <p>PrepHooks is an advanced, active-recall learning platform built to help candidates master high-stakes professional and academic examinations.</p>
+
+    <h3>The philosophy: active recall over passive reading</h3>
+    <p>Traditional exam preparation relies heavily on passive textbook reading — a method proven to result in rapid memory decay. PrepHooks flips the learning paradigm on its head. Built around learning science, our platform utilizes a question-first diagnostic engine.</p>
+
+    <div class="feature-list">
+      <div>
+        <div class="feature-title">Targeted practice</div>
+        <div class="feature-body">Candidates dive straight into high-yield, syllabus-aligned question sets covering complex medical, licensure, and academic subjects — such as Nursing, Midwifery, and competitive entrance syllabi.</div>
+      </div>
+      <div>
+        <div class="feature-title">Deep active recall loops</div>
+        <div class="feature-body">Every question is paired with comprehensive, step-by-step rationales, forcing active memory retrieval and long-term knowledge retention.</div>
+      </div>
+      <div>
+        <div class="feature-title">Real-time diagnostics — PrepMap</div>
+        <div class="feature-body">Our state-synced analytics track topic-level performance in real time, helping users pinpoint exact knowledge gaps before exam day.</div>
+      </div>
+    </div>
+
+    <h3>Built for high performance</h3>
+    <p>With zero-friction navigation, tactile haptic feedback, offline-ready state caching, and neo-minimalist mobile interfaces, PrepHooks delivers a premium, distraction-free environment engineered for modern, mobile-first learners.</p>
+
+    <div class="kicker-line">Stop reading passively. Start mastering actively.</div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="logo">PrepHooks</a>
+    <nav class="footer-nav">
+      <a href="help.html">Help</a>
+      <a href="legal.html">Legal</a>
+    </nav>
+    <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('topNav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('open')));
+
+  const sections = document.querySelectorAll('section.doc');
+  const subLinks = document.querySelectorAll('.subnav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        subLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.subnav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
