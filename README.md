@@ -1,43 +1,52 @@
-# 📚 Prephooks
+# 📚 PrepHooks
 
-> An adaptive educational quiz and exam preparation platform designed to help students master academic subjects through intelligent practice metrics and interactive study feeds.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+> **Boost your score with a fun, focused, and adaptive learning experience.**
 
 ---
 
-## 🎯 About Prephooks
+## 🎯 About PrepHooks
 
-**Prephooks** goes beyond static past question archives. It is a full-stack platform that delivers interactive, adaptive quiz sessions to help students study smarter. By tracking performance metrics and utilizing dynamic caching, Prephooks provides real-time feedback, step-by-step progress setups, and tailored practice feeds.
+PrepHooks is an exam-driven preparation platform designed to help students master critical examinations through active recall, adaptive challenges, and distraction-free practice. Rather than measuring time spent on passive reading, PrepHooks focuses on recall accuracy to turn everyday study sessions into predictable exam results.
 
 ---
 
 ## ✨ Key Features
 
-- **⚡ Adaptive Question Feeds:** Smart question delivery based on progress metrics and active topic focus.
-- **📊 Performance Tracking:** Integrated performance gauge indicators, score tracking, and spaced retention logic.
-- **🔄 Smart Caching:** Disk and session-based local memory caching to ensure fast, low-latency question scrolling and offline resilience.
-- **🎯 Custom Quiz Wizard:** Step-by-step wizard allowing users to tailor quiz length, subjects, and difficulty parameters.
-- **📱 Dynamic UI:** Fully responsive interface featuring micro-animations and smooth fluid visual components.
+* **🎮 Fun, Without the Fatigue:** Game-like practice with smart challenges, instant feedback, and bite-sized questions that make studying feel rewarding rather than exhausting.
+* **⚡ Zero-Friction Design:** A clean, distraction-free interface engineered so your total energy goes directly into learning.
+* **🧠 Active Recall Algorithm:** A smart learning engine that continuously isolates knowledge gaps and forces answer retrieval under exam-like conditions to maximize retention.
+* **📈 Daily Accountability & Progress Tracking:** Built-in accountability loops and clear tracking metrics that show you where you stand and what to master next.
 
 ---
 
-## 🛠️ Tech Stack
+## 🎓 Target Examinations Supported
 
-### Web & Mobile Frontend
-- **Frameworks:** React / Flutter
-- **UI & Motion:** Custom Widgets, Framer Motion keyframe animations, Material Design 3
+PrepHooks provides specialized prep and question feeds for key academic and professional examinations, including:
 
-### Backend & Database
-- **Runtime:** Node.js, Express.js
-- **ORM / DB:** Sequelize ORM, Relational SQL
-- **Authentication:** Secure JWT authentication and session controllers
+* **JAMB**
+* **WAEC**
+* **NECO**
+* **NMCN**
+* **MDCN**
 
 ---
 
-## 🚀 Getting Started
+## 📱 Platform Availability
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v18+ recommended)
-- [Git](https://git-scm.com/)
-- [Flutter SDK](https://flutter.dev/) *(if running the mobile client)*
+PrepHooks is engineered for mobile learning on the go and is available across major mobile platforms:
+
+* 🍏 **App Store** (iOS)
+* 🤖 **Google Play Store** (Android)
+
+---
+
+## 📄 Legal & Support
+
+For help, support inquiries, or regulatory policies, please refer to the following resources:
+
+* **Help Center:** `help.html`
+* **Legal Information:** `legal.html`
+
+---
+
+© 2026 PrepHooks Nigeria Limited. All rights reserved.
