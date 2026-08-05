@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrepHooks AI Chat Widget</title>
+<style>
+  :root {
+    --ph-black: #1a1a1a;
+    --ph-gray: #888888;
+    --ph-gray-light: #eeeeee;
+    --ph-white: #ffffff;
+    --ph-red: #e0263a;
+    --ph-red-dark: #c01f31;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--ph-white);
+    /* Demo page backdrop so the widget can be seen floating — remove this
+       body rule when you drop the widget markup into an existing page. */
+    min-height: 100vh;
+  }
+
+  .demo-note {
+    max-width: 480px;
+    margin: 64px auto 0;
+    padding: 0 24px;
+    color: var(--ph-gray);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  /* ===== Launcher button ===== */
+  #ph-chat-launcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--ph-red);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(224, 38, 58, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    z-index: 999;
+  }
+  #ph-chat-launcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(224, 38, 58, 0.45);
+  }
+  #ph-chat-launcher svg { width: 24px; height: 24px; }
+
+  /* ===== Chat panel ===== */
+  #ph-chat-panel {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    height: 520px;
+    max-height: calc(100vh - 140px);
+    background: var(--ph-white);
+    border: 1px solid var(--ph-gray-light);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 998;
+  }
+  #ph-chat-panel.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .ph-chat-header {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--ph-gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ph-chat-header-title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .ph-chat-header-title strong {
+    font-size: 15px;
+    color: var(--ph-black);
+    letter-spacing: -0.01em;
+  }
+  .ph-chat-header-title span {
+    font-size: 12px;
+    color: var(--ph-gray);
+  }
+  .ph-chat-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ph-gray);
+    font-size: 18px;
+    line-height: 1;
+    padding: 4px;
+  }
+  .ph-chat-close:hover { color: var(--ph-black); }
+
+  .ph-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ph-msg {
+    max-width: 82%;
+    padding: 10px 13px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .ph-msg.ai {
+    align-self: flex-start;
+    background: var(--ph-gray-light);
+    color: var(--ph-black);
+    border-bottom-left-radius: 4px;
+  }
+  .ph-msg.user {
+    align-self: flex-end;
+    background: var(--ph-black);
+    color: var(--ph-white);
+    border-bottom-right-radius: 4px;
+  }
+  .ph-msg.error {
+    align-self: flex-start;
+    background: #fdeceb;
+    color: var(--ph-red-dark);
+    border-bottom-left-radius: 4px;
+  }
+
+  .ph-typing {
+    align-self: flex-start;
+    display: flex;
+    gap: 4px;
+    padding: 12px 13px;
+    background: var(--ph-gray-light);
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+  }
+  .ph-typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ph-gray);
+    animation: ph-bounce 1.2s infinite ease-in-out;
+  }
+  .ph-typing span:nth-child(2) { animation-delay: 0.15s; }
+  .ph-typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes ph-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  .ph-chat-inputbar {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid var(--ph-gray-light);
+  }
+  .ph-chat-inputbar textarea {
+    flex: 1;
+    resize: none;
+    border: 1px solid var(--ph-gray-light);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    max-height: 84px;
+    color: var(--ph-black);
+  }
+  .ph-chat-inputbar textarea:focus {
+    outline: none;
+    border-color: var(--ph-red);
+  }
+  .ph-chat-send {
+    background: var(--ph-red);
+    border: none;
+    color: var(--ph-white);
+    width: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+  }
+  .ph-chat-send:hover { background: var(--ph-red-dark); }
+  .ph-chat-send:disabled { background: var(--ph-gray-light); cursor: not-allowed; }
+  .ph-chat-send svg { width: 16px; height: 16px; }
+
+  @media (max-width: 420px) {
+    #ph-chat-panel {
+      right: 16px;
+      left: 16px;
+      width: auto;
+      bottom: 88px;
+    }
+    #ph-chat-launcher { right: 16px; bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<p class="demo-note">Demo page — click the red button in the bottom-right corner to open the chat.</p>
+
+<!-- ===== Launcher ===== -->
+<button id="ph-chat-launcher" aria-label="Open PrepHooks AI chat">
+  <svg id="ph-icon-open" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
+  <svg id="ph-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+    <line x1="18" y1="6" x2="6" y2="18"/>
+    <line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+</button>
+
+<!-- ===== Chat panel ===== -->
+<div id="ph-chat-panel">
+  <div class="ph-chat-header">
+    <div class="ph-chat-header-title">
+      <strong>PrepHooks AI</strong>
+      <span>Exam tutor · usually replies instantly</span>
+    </div>
+    <button class="ph-chat-close" id="ph-chat-close-btn" aria-label="Close chat">✕</button>
+  </div>
+
+  <div class="ph-chat-messages" id="ph-chat-messages">
+    <div class="ph-msg ai">Hi! I'm the PrepHooks AI tutor. Ask me about a topic, a practice question, or how to study smarter — what's on your mind?</div>
+  </div>
+
+  <div class="ph-chat-inputbar">
+    <textarea id="ph-chat-input" rows="1" placeholder="Ask something..."></textarea>
+    <button class="ph-chat-send" id="ph-chat-send-btn" aria-label="Send message">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ---- Config -------------------------------------------------------
+  // Adjust this to the real, deployed path of your agent route
+  // (e.g. the agentRoutes.js router mounted in your backend).
+  const API_URL = 'https://www.prephooks.com/api/agent';
+
+  // In-memory session id — resets on page reload. Swap for a real user id
+  // once auth is wired into this endpoint.
+  const sessionId = 'web_' + Math.random().toString(36).slice(2) + Date.now();
+
+  // ---- Elements -------------------------------------------------------
+  const launcher = document.getElementById('ph-chat-launcher');
+  const panel = document.getElementById('ph-chat-panel');
+  const closeBtn = document.getElementById('ph-chat-close-btn');
+  const messagesEl = document.getElementById('ph-chat-messages');
+  const input = document.getElementById('ph-chat-input');
+  const sendBtn = document.getElementById('ph-chat-send-btn');
+  const iconOpen = document.getElementById('ph-icon-open');
+  const iconClose = document.getElementById('ph-icon-close');
+
+  let isOpen = false;
+  let isSending = false;
+
+  function togglePanel() {
+    isOpen = !isOpen;
+    panel.classList.toggle('open', isOpen);
+    iconOpen.style.display = isOpen ? 'none' : 'block';
+    iconClose.style.display = isOpen ? 'block' : 'none';
+    if (isOpen) input.focus();
+  }
+
+  launcher.addEventListener('click', togglePanel);
+  closeBtn.addEventListener('click', togglePanel);
+
+  function addMessage(text, role) {
+    const el = document.createElement('div');
+    el.className = 'ph-msg ' + role;
+    el.textContent = text;
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return el;
+  }
+
+  function showTyping() {
+    const el = document.createElement('div');
+    el.className = 'ph-typing';
+    el.id = 'ph-typing-indicator';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function hideTyping() {
+    const el = document.getElementById('ph-typing-indicator');
+    if (el) el.remove();
+  }
+
+  // Pull the reply text out of common response shapes so this keeps
+  // working whether the backend returns an OpenAI-style payload or a
+  // simpler custom one.
+  function extractReply(data) {
+    if (!data) return null;
+    if (typeof data === 'string') return data;
+    if (data.choices && data.choices[0]) {
+      const c = data.choices[0];
+      if (c.message && c.message.content) return c.message.content;
+      if (c.text) return c.text;
+    }
+    if (data.reply) return data.reply;
+    if (data.message && typeof data.message === 'string') return data.message;
+    if (data.content) return data.content;
+    return null;
+  }
+
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text || isSending) return;
+
+    addMessage(text, 'user');
+    input.value = '';
+    input.style.height = 'auto';
+    isSending = true;
+    sendBtn.disabled = true;
+    showTyping();
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Session-Id': sessionId,
+        },
+        body: JSON.stringify({ message: text }),
+      });
+
+      const data = await res.json();
+      hideTyping();
+
+      if (!res.ok) {
+        addMessage('Something went wrong reaching the tutor. Please try again.', 'error');
+        console.error('Agent API error:', data);
+      } else {
+        const reply = extractReply(data);
+        addMessage(reply || 'Hmm, I got an empty response — try rephrasing that.', 'ai');
+      }
+    } catch (err) {
+      hideTyping();
+      addMessage('Could not connect to PrepHooks AI. Check your connection and try again.', 'error');
+      console.error('Chat widget fetch error:', err);
+    } finally {
+      isSending = false;
+      sendBtn.disabled = false;
+    }
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  input.addEventListener('input', function () {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 84) + 'px';
+  });
+})();
+</script>
+
+</body>
+</html>
