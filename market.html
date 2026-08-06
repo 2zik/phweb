@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrepHooks — Test to learn</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">PrepHooks</a>
+            <nav class="top-nav" id="topNav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="market.html" class="active">Why PrepHooks</a>
+                <a href="help.html">Help</a>
+                <a href="legal.html">Legal</a>
+                <a href="#download" class="nav-cta">Download</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <div class="hero">
+        <div class="eyebrow">PrepHooks</div>
+        <h1>A system for focused preparation.</h1>
+        <p>An exam intelligence company. Our mission is to close the gap between effort and outcome for every student preparing for a high-stakes exam.</p>
+        <div class="cta-row" style="display: flex; justify-content: center;">
+            <a href="#download" class="btn btn-outline">Get started now for free</a>
+        </div>
+    </div>
+
+    <!-- ===== SECTION: CONFIDENCE ===== -->
+    <section class="block">
+        <div class="inner">
+            <h2>Walk into your exam with total confidence.</h2>
+            <p>For decades, exam preparation has changed its tools without changing its approach. Printed past questions became digital question banks. Question banks became apps. But the student is still handed a mountain of content and left to work out, alone, what to study, when to study it, and whether they are making progress.</p>
+            <p>The content was never the problem. The gap was in how students studied.</p>
+            <p>Most students default to methods that feel productive but are not: re-reading notes, highlighting text, cramming the night before. These create the illusion of understanding — familiarity mistaken for knowledge.</p>
+            <p>PrepHooks is our answer. It is a system that pays attention to how a student performs, shows them precisely where to work, and guides their progress with honesty and clarity.</p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION: HOW IT WORKS ===== -->
+    <section class="block">
+        <div class="inner">
+            <h2>How it works.</h2>
+            <p>We built a loop.</p>
+            <div style="margin: 24px 0 28px; padding-left: 8px;">
+                <p style="font-weight: 600; margin-bottom: 4px;"><u>Teach</u> — Clear, bite-sized lessons that build understanding without overwhelming the mind.</p>
+                <p style="font-weight: 600; margin-bottom: 4px;"><u>Test</u> — Questions that target exactly what needs attention, based on how the student has performed before.</p>
+                <p style="font-weight: 600; margin-bottom: 4px;"><u>Track</u> — A visual map of progress, honest and unsparing, so the student always knows where they stand.</p>
+            </div>
+            <div class="gray-card">
+                <p>One question at a time. One swipe at a time. No dashboards to interpret, no decisions to make before the real work starts. Just a clear, quiet path forward.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION: INTELLIGENCE ===== -->
+    <section class="block">
+        <div class="inner">
+            <h2>Intelligence, to your pace.</h2>
+            <p>We pay attention to how you perform, and bring back what you missed right when you need to review it — until every weak spot becomes a strength.</p>
+            <p>A score that flatters a student is a score that fails them. Real improvement starts with an accurate picture of where a student stands today, not where they wish they were. The Readiness view is built to show the truth, not to reward the attempt.</p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION: EXAMS ===== -->
+    <section class="block">
+        <div class="inner">
+            <h2>Made for the exams that matter.</h2>
+            <p style="font-size: 17px; color: #888888; letter-spacing: 0.02em;">JAMB · WAEC · NECO · NMCN · MDCN</p>
+            <p>Available on Android and iOS. Syncs across devices. Works offline, and catches up when you are back.</p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION: BELIEFS ===== -->
+    <section class="block">
+        <div class="inner">
+            <h2>What we believe.</h2>
+            <p>Effective preparation should be straightforward and honest. A learning tool should get out of the way — simple, focused, quiet — so the work that matters gets the student's full attention.</p>
+            <p>Personalization is not a feature. It is a necessity. Every student's strengths are different. Every student's gaps are different. Every student learns at their own pace. A system that treats everyone the same helps no one as well as it could.</p>
+        </div>
+    </section>
+
+    <!-- ===== DOWNLOAD CTA ===== -->
+    <div class="download" id="download">
+        <div class="inner">
+            <h2>Start preparing differently.</h2>
+            <p>Download PrepHooks and start your journey with focused, intelligent practice.</p>
+            <p style="font-size: 17px; color: #888888; margin-bottom: 32px;">Not because we promise miracles — but because we believe that with the right system, students can do remarkable things.</p>
+            <div class="cta-row">
+                <a href="#" class="btn">Get it on Google Play</a>
+                <a href="#" class="btn btn-outline">Download on the App Store</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <a href="index.html" class="logo" style="font-size:18px;">PrepHooks</a>
+            <nav class="footer-nav">
+                <a href="about.html">About</a>
+                <a href="help.html">Help</a>
+                <a href="legal.html">Legal</a>
+            </nav>
+            <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        const toggle = document.getElementById('navToggle');
+        const nav = document.getElementById('topNav');
+        if (toggle && nav) {
+            toggle.addEventListener('click', () => nav.classList.toggle('open'));
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => nav.classList.remove('open'));
+            });
+        }
+    </script>
+
+</body>
+</html>
