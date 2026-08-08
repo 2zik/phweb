@@ -224,7 +224,17 @@
   // Render the card to a PNG by drawing the live DOM elements onto a canvas.
   // (More reliable than SVG <foreignObject>, which drops CSS + gradient text.)
   function downloadCard() {
-    const scale = 2; // 2x for crisp output
+    // Render at a FIXED high-res width, independent of the on-screen card size,
+    // so the PNG is sharp everywhere (phones would otherwise export ~750px).
+    const EXPORT_W = Math.max(card.getBoundingClientRect().width, 1080);
+    const scale = 3; // 3x for crisp output
+
+    // Temporarily expand the card to the export width and re-fit the title.
+    const savedWidth = card.style.width;
+    const savedTitleFontSize = cardTitle.style.fontSize;
+    card.style.width = EXPORT_W + 'px';
+    guardTitle();
+
     const cardRect = card.getBoundingClientRect();
     const w = cardRect.width, h = cardRect.height;
 
@@ -252,6 +262,10 @@
     a.download = 'prephooks-share-card.png';
     a.href = canvas.toDataURL('image/png');
     a.click();
+
+    // Restore the on-screen card to its original size/title.
+    card.style.width = savedWidth;
+    cardTitle.style.fontSize = savedTitleFontSize;
   }
 
   function drawSimpleText(ctx, el, cardRect) {
