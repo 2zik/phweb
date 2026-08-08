@@ -72,12 +72,13 @@
   }
   .card .brand { color: var(--grey); font-size: 16px; letter-spacing: 0.5px; margin-bottom: auto; }
   .card .title {
-    font-size: 200px;
     font-weight: 800;
     line-height: 1;
     letter-spacing: -4px;
     color: var(--ink);
     margin: 0;
+    white-space: nowrap;
+    max-width: 100%;
   }
   .card .title .hl {
     background: linear-gradient(100deg, var(--magenta) 0%, var(--magenta-light) 100%);
@@ -87,11 +88,12 @@
     color: var(--magenta);
   }
   .card .subtitle {
-    font-size: 26px;
     font-weight: 700;
     color: var(--ink);
     margin-top: 8px;
     line-height: 1.3;
+    max-width: 90%;
+    text-align: center;
   }
   .card .powered { color: var(--grey-light); font-size: 12px; margin-top: auto; }
 
@@ -141,6 +143,30 @@
   const cardTitle = document.getElementById('cardTitle');
   const cardSubtitle = document.getElementById('cardSubtitle');
   const actions = document.getElementById('actions');
+  const card = document.getElementById('card');
+
+  const TITLE_MAX = 220;   // px, for a short title like "134"
+  const TITLE_MIN = 60;    // px, floor so it never gets unreadable
+  const SUB_MIN = 16;      // px
+  const SUB_MAX = 30;      // px
+
+  function fitTitle() {
+    // Reset to max, then shrink until it fits the card's inner width.
+    cardTitle.style.fontSize = TITLE_MAX + 'px';
+    const maxW = card.clientWidth - 96; // card padding (48px each side)
+    let size = TITLE_MAX;
+    while (cardTitle.scrollWidth > maxW && size > TITLE_MIN) {
+      size -= 4;
+      cardTitle.style.fontSize = size + 'px';
+    }
+    return size;
+  }
+
+  function fitSubtitle() {
+    // Scale subtitle with the card, clamped; allow wrapping for long text.
+    const base = Math.min(SUB_MAX, Math.max(SUB_MIN, Math.round(card.clientWidth / 22)));
+    cardSubtitle.style.fontSize = base + 'px';
+  }
 
   function render() {
     const title = document.getElementById('title').value;
@@ -161,12 +187,21 @@
 
     cardTitle.innerHTML = safe;
     cardSubtitle.textContent = subtitle;
+    fitTitle();
+    fitSubtitle();
     actions.classList.remove('hidden');
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     render();
+  });
+
+  // Re-fit on window resize (responsive without re-submitting).
+  window.addEventListener('resize', () => {
+    if (actions.classList.contains('hidden')) return;
+    fitTitle();
+    fitSubtitle();
   });
 
   // Initial render with the default values.
