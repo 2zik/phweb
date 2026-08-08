@@ -114,7 +114,8 @@
     font-weight: 700;
     font-size: clamp(18px, 3vw, 20px);
     letter-spacing: 0.04em;
-    margin-bottom: auto;
+    /* 3x the normal card rhythm (~32px -> ~96px) between brand and title */
+    margin-bottom: clamp(48px, 14cqi, 110px);
   }
   .card .title {
     /* Very bold, index-page heading weight language */
