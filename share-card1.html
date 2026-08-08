@@ -218,9 +218,11 @@
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, w, h);
 
-    // Brand, subtitle, powered: simple centered text
-    [card.querySelector('.brand'), card.querySelector('.subtitle'), card.querySelector('.powered')]
-      .forEach(el => drawSimpleText(ctx, el, cardRect));
+    // Brand + powered: simple centered single-line text
+    drawSimpleText(ctx, card.querySelector('.brand'), cardRect);
+    drawSimpleText(ctx, card.querySelector('.powered'), cardRect);
+    // Subtitle: wrap to multiple centered lines (matches DOM wrapping)
+    drawWrappedText(ctx, card.querySelector('.subtitle'), cardRect);
 
     // Title: per-character so the highlight gets the red gradient
     drawTitleText(ctx, cardTitle, cardRect);
@@ -242,6 +244,41 @@
     const cx = (r.left - cardRect.left) + (ctx.textAlign === 'center' ? r.width / 2 : 0);
     const cy = (r.top - cardRect.top) + r.height / 2;
     ctx.fillText(el.textContent.trim(), cx, cy);
+  }
+
+  function drawWrappedText(ctx, el, cardRect) {
+    if (!el) return;
+    const cs = getComputedStyle(el);
+    const r = el.getBoundingClientRect();
+    ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    ctx.fillStyle = cs.color;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+
+    const maxW = r.width;
+    const lineHeight = parseFloat(cs.fontSize) * 1.3;
+    const words = el.textContent.trim().split(/\s+/);
+    const lines = [];
+    let line = '';
+    words.forEach(word => {
+      const test = line ? line + ' ' + word : word;
+      if (ctx.measureText(test).width > maxW && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    });
+    if (line) lines.push(line);
+
+    // Vertical-center the block within the subtitle box
+    const totalH = lines.length * lineHeight;
+    let cy = (r.top - cardRect.top) + r.height / 2 - totalH / 2 + lineHeight / 2;
+    const cx = (r.left - cardRect.left) + r.width / 2;
+    lines.forEach(l => {
+      ctx.fillText(l, cx, cy);
+      cy += lineHeight;
+    });
   }
 
   function drawTitleText(ctx, el, cardRect) {
