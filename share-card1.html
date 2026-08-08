@@ -137,19 +137,19 @@
   }
   .card .subtitle {
     font-weight: 600;          /* matches index block h2 weight */
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;   /* tighter tracking */
     color: var(--ink);
     margin-top: 10px;
-    line-height: 1.15;         /* more compact than before */
+    line-height: 1.05;         /* tighter leading */
     max-width: 92%;
     font-size: clamp(18px, 11cqi, 34px);
   }
   .card .subsubtitle {
     font-weight: 500;          /* lighter than the subtitle */
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;   /* tighter tracking */
     color: var(--grey);        /* recessive, like the sample */
     margin-top: 6px;
-    line-height: 1.25;
+    line-height: 1.12;         /* tighter leading */
     max-width: 90%;
     font-size: clamp(12px, 5cqi, 17px);
   }
@@ -276,7 +276,7 @@
     ctx.textAlign = 'center';
 
     const maxW = r.width;
-    const lineHeight = parseFloat(cs.fontSize) * 1.15;
+    const lineHeight = parseFloat(cs.fontSize) * 1.05;
     const words = el.textContent.trim().split(/\s+/);
     const lines = [];
     let line = '';
