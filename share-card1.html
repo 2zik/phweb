@@ -122,6 +122,8 @@
     line-height: 1.05;
     color: var(--ink);
     white-space: nowrap;
+    width: 100%;               /* span card so the box centers for export */
+    text-align: center;
     /* cqi = % of the CARD's own width: stays proportional at any size, no overflow */
     font-size: clamp(100px, 75cqi, 180px);
   }
@@ -286,20 +288,23 @@
     const r = el.getBoundingClientRect();
     const fontSize = parseFloat(cs.fontSize);
     ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-    if (cs.letterSpacing && cs.letterSpacing !== 'normal') ctx.letterSpacing = cs.letterSpacing;
     ctx.textBaseline = 'middle';
-    const cy = (r.top - cardRect.top) + r.height / 2;
+    ctx.textAlign = 'left';
+    ctx.letterSpacing = '0px'; // we advance manually below for consistent measure+draw
 
-    const text = el.textContent;
-    const chars = text.split('');
+    const ls = (cs.letterSpacing && cs.letterSpacing !== 'normal') ? parseFloat(cs.letterSpacing) : 0;
+    const chars = el.textContent.split('');
     const widths = chars.map(c => ctx.measureText(c).width);
-    const total = widths.reduce((a, b) => a + b, 0);
-    let x = (r.left - cardRect.left) + (r.width - total) / 2; // center the run
+    const total = widths.reduce((a, b) => a + b, 0) + ls * Math.max(0, chars.length - 1);
+
+    // Horizontal center of the run, relative to the (already centered) title box
+    let x = (r.left - cardRect.left) + (r.width - total) / 2;
+    const cy = (r.top - cardRect.top) + r.height / 2;
 
     const hl = document.getElementById('highlight').value;
     const root = getComputedStyle(document.documentElement);
-    const c1 = root.getPropertyValue('--primary').trim();
-    const c2 = root.getPropertyValue('--primary-2').trim();
+    const c1 = (root.getPropertyValue('--primary') || '#FF203B').trim();
+    const c2 = (root.getPropertyValue('--primary-2') || '#FF5C77').trim();
 
     chars.forEach((c, i) => {
       if (hl !== '' && c === hl) {
@@ -311,9 +316,8 @@
         ctx.fillStyle = cs.color;
       }
       ctx.fillText(c, x, cy);
-      x += widths[i];
+      x += widths[i] + ls;
     });
-    ctx.letterSpacing = '0px';
   }
 
   const TITLE_FLOOR = 64; // px — last-resort guard so it never overflows (raised so long text stays bigger)
