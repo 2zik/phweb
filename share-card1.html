@@ -210,7 +210,7 @@
 
     // Start large: the smaller of card-height-based and a hard ceiling,
     // so short titles grow to fill instead of being capped at cqi.
-    let size = Math.min(maxH * 0.9, 400);
+    let size = Math.min(maxH * 0.95, 560);
     cardTitle.style.fontSize = size + 'px';
 
     // Shrink only while it actually overflows (width OR height).
