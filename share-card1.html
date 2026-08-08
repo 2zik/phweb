@@ -141,7 +141,7 @@
     letter-spacing: -0.04em;   /* tighter tracking */
     color: var(--ink);
     margin-top: 10px;
-    line-height: 1.0;          /* tightest leading */
+    line-height: 1.15;         /* safe: tight but glyphs don't collide */
     max-width: 92%;
     font-size: clamp(20px, 12cqi, 40px);   /* bigger */
   }
@@ -150,7 +150,7 @@
     letter-spacing: -0.02em;   /* tighter tracking */
     color: var(--grey);        /* recessive, like the sample */
     margin-top: 6px;
-    line-height: 1.12;         /* tighter leading */
+    line-height: 1.15;         /* safe: tight but glyphs don't collide */
     max-width: 90%;
     font-size: clamp(12px, 5cqi, 17px);
   }
@@ -277,7 +277,7 @@
     ctx.textAlign = 'center';
 
     const maxW = r.width;
-    const lineHeight = parseFloat(cs.fontSize) * 1.0;
+    const lineHeight = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.15;
     const words = el.textContent.trim().split(/\s+/);
     const lines = [];
     let line = '';
