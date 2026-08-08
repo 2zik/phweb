@@ -348,13 +348,15 @@
     const maxW = card.clientWidth - parseFloat(cs.paddingLeft) * 2;
     const maxH = card.clientHeight - parseFloat(cs.paddingTop) * 2;
 
-    // Start large: the smaller of card-height-based and a hard ceiling,
-    // so short titles grow to fill instead of being capped at cqi.
-    let size = Math.min(maxH * 1.0, 720);
+    // Start large but leave room for the brand gap + subtitle + caption +
+    // footer. Cap the title at ~half the card height so the rest fits.
+    let size = Math.min(maxH * 0.5, 720);
     cardTitle.style.fontSize = size + 'px';
 
-    // Shrink only while it actually overflows (width OR height).
-    while ((cardTitle.scrollWidth > maxW || cardTitle.scrollHeight > maxH) && size > TITLE_FLOOR) {
+    // Shrink only while it actually overflows. Watch the CARD's scrollHeight
+    // (not just the title's) so the brand + multi-line subtitle + caption +
+    // footer all get their space — otherwise the title overlaps them.
+    while ((cardTitle.scrollWidth > maxW || card.scrollHeight > card.clientHeight) && size > TITLE_FLOOR) {
       size -= 4;
       cardTitle.style.fontSize = size + 'px';
     }
