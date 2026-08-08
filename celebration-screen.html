@@ -118,6 +118,9 @@
     justify-content: center;
     text-align: center;
     padding: clamp(28px, 5vw, 48px);
+    /* REQUIRED for cqi units below to work at all — without this,
+       container-relative units have no context and silently fail. */
+    container-type: inline-size;
   }
   .card .brand {
     color: var(--grey);
@@ -131,7 +134,8 @@
     line-height: 1;
     color: var(--ink);
     white-space: nowrap;
-    /* vw + clamp: scales with viewport, no horizontal overflow */
+    /* cqi = % of the CARD's own width, so this stays proportional
+       to the card at any screen size instead of drifting with vw. */
     font-size: clamp(80px, 46cqi, 260px);
   }
   .card .title .hl {
