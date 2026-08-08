@@ -201,13 +201,21 @@
 
   const TITLE_FLOOR = 40; // px — last-resort guard so it never overflows
 
-  // Safety guard: if cqi still overflows the card, shrink until it fits.
+  // Smart fit: render at a big size, then shrink ONLY if it overflows the
+  // card. Short text ("13", "A") ends up large; long text shrinks to fit.
   function guardTitle() {
     const cs = getComputedStyle(card);
     const maxW = card.clientWidth - parseFloat(cs.paddingLeft) * 2;
-    let size = parseFloat(getComputedStyle(cardTitle).fontSize);
-    while (cardTitle.scrollWidth > maxW && size > TITLE_FLOOR) {
-      size -= 2;
+    const maxH = card.clientHeight - parseFloat(cs.paddingTop) * 2;
+
+    // Start large: the smaller of card-height-based and a hard ceiling,
+    // so short titles grow to fill instead of being capped at cqi.
+    let size = Math.min(maxH * 0.9, 400);
+    cardTitle.style.fontSize = size + 'px';
+
+    // Shrink only while it actually overflows (width OR height).
+    while ((cardTitle.scrollWidth > maxW || cardTitle.scrollHeight > maxH) && size > TITLE_FLOOR) {
+      size -= 4;
       cardTitle.style.fontSize = size + 'px';
     }
   }
