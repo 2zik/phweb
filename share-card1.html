@@ -136,13 +136,13 @@
     color: var(--primary);
   }
   .card .subtitle {
-    font-weight: 600;          /* matches index block h2 weight */
-    letter-spacing: -0.03em;   /* tighter tracking */
+    font-weight: 800;          /* bolder */
+    letter-spacing: -0.04em;   /* tighter tracking */
     color: var(--ink);
     margin-top: 10px;
-    line-height: 1.05;         /* tighter leading */
+    line-height: 1.0;          /* tightest leading */
     max-width: 92%;
-    font-size: clamp(18px, 11cqi, 34px);
+    font-size: clamp(20px, 13cqi, 40px);   /* bigger */
   }
   .card .subsubtitle {
     font-weight: 500;          /* lighter than the subtitle */
@@ -276,7 +276,7 @@
     ctx.textAlign = 'center';
 
     const maxW = r.width;
-    const lineHeight = parseFloat(cs.fontSize) * 1.05;
+    const lineHeight = parseFloat(cs.fontSize) * 1.0;
     const words = el.textContent.trim().split(/\s+/);
     const lines = [];
     let line = '';
