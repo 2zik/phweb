@@ -235,10 +235,12 @@
 
     cardTitle.innerHTML = safe;
     cardSub.textContent = subtitle;
-    guardTitle();
 
+    // Make the card visible BEFORE measuring — guardTitle needs the real
+    // clientWidth/clientHeight (a hidden display:none card reports 0).
     formView.hidden = true;
     cardView.hidden = false;
+    guardTitle();
   }
 
   function showForm() {
