@@ -114,7 +114,7 @@
     letter-spacing: 0.04em;
     margin-bottom: auto;
   }
-  .card .title {
+  .card .share-title {
     /* Very bold, index-page heading weight language */
     font-weight: 800;
     letter-spacing: -0.03em;   /* index hero/block h1/h2 tracking */
@@ -124,7 +124,7 @@
     /* cqi = % of the CARD's own width: stays proportional at any size, no overflow */
     font-size: clamp(100px, 80cqi, 320px);
   }
-  .card .title .hl {
+  .card .share-hl {
     background: linear-gradient(100deg, var(--primary) 0%, var(--primary-2) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -180,7 +180,7 @@
   <section class="view" id="cardView" hidden>
     <div class="card" id="card">
       <div class="brand">PrepHooks</div>
-      <div class="title" id="cardTitle">134</div>
+      <div class="share-title" id="cardTitle">134</div>
       <div class="subtitle" id="cardSubtitle">questions attempted in July 2026</div>
       <div class="powered">Powered by PrepHooks Nigeria Limited</div>
     </div>
@@ -200,13 +200,16 @@
 
   const TITLE_FLOOR = 40; // px — last-resort guard so it never overflows
 
-  // Safety guard: if cqi still overflows the card, shrink until it fits.
-  function guardTitle() {
+  // Fill the title to the card: grow as large as possible, then shrink
+  // only until it fits BOTH width and height (no overflow, maximal size).
+  function fitTitleToCard() {
     const cs = getComputedStyle(card);
-    const maxW = card.clientWidth - parseFloat(cs.paddingLeft) * 2;
-    let size = parseFloat(getComputedStyle(cardTitle).fontSize);
-    while (cardTitle.scrollWidth > maxW && size > TITLE_FLOOR) {
-      size -= 2;
+    const availW = card.clientWidth - parseFloat(cs.paddingLeft) * 2;
+    const availH = card.clientHeight - parseFloat(cs.paddingTop) * 2;
+    let size = 1000;
+    cardTitle.style.fontSize = size + 'px';
+    while ((cardTitle.scrollWidth > availW || cardTitle.scrollHeight > availH) && size > TITLE_FLOOR) {
+      size -= 4;
       cardTitle.style.fontSize = size + 'px';
     }
   }
@@ -220,13 +223,13 @@
 
     const safe = title.split('').map(ch => {
       const esc = ch.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-      if (highlight !== '' && ch === highlight) return `<span class="hl">${esc}</span>`;
+      if (highlight !== '' && ch === highlight) return `<span class="share-hl">${esc}</span>`;
       return esc;
     }).join('');
 
     cardTitle.innerHTML = safe;
     cardSub.textContent = subtitle;
-    guardTitle();
+    fitTitleToCard();
 
     formView.hidden = true;
     cardView.hidden = false;
@@ -239,7 +242,7 @@
 
   form.addEventListener('submit', (e) => { e.preventDefault(); render(); });
   editBtn.addEventListener('click', showForm);
-  window.addEventListener('resize', () => { if (!cardView.hidden) guardTitle(); });
+  window.addEventListener('resize', () => { if (!cardView.hidden) fitTitleToCard(); });
 </script>
 </body>
 </html>
