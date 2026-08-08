@@ -110,11 +110,12 @@
   }
   .card .brand {
     color: var(--grey);
-    font-size: clamp(13px, 2.4vw, 16px);
+    font-weight: 700;
+    font-size: clamp(18px, 3vw, 20px);
     letter-spacing: 0.04em;
     margin-bottom: auto;
   }
-  .card .share-title {
+  .card .title {
     /* Very bold, index-page heading weight language */
     font-weight: 800;
     letter-spacing: -0.03em;   /* index hero/block h1/h2 tracking */
@@ -122,9 +123,9 @@
     color: var(--ink);
     white-space: nowrap;
     /* cqi = % of the CARD's own width: stays proportional at any size, no overflow */
-    font-size: clamp(100px, 80cqi, 320px);
+    font-size: clamp(100px, 75cqi, 180px) !important;
   }
-  .card .share-hl {
+  .card .title .hl {
     background: linear-gradient(100deg, var(--primary) 0%, var(--primary-2) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -132,17 +133,17 @@
     color: var(--primary);
   }
   .card .subtitle {
-    font-weight: 700;          /* matches index block h2 weight */
+    font-weight: 600;          /* matches index block h2 weight */
     letter-spacing: -0.02em;
     color: var(--ink);
     margin-top: 12px;
     line-height: 1.3;
-    max-width: 92%;
-    font-size: clamp(20px, 11cqi, 38px);
+    max-width: 98%;
+    font-size: clamp(16px, 10cqi, 30px);
   }
   .card .powered {
-    color: var(--grey-soft);
-    font-size: clamp(14px, 2.5vw, 16px);
+    color: var(--grey);
+    font-size: clamp(10px, 1.5vw, 13px);
     margin-top: auto;
     letter-spacing: 0.02em;
   }
@@ -180,7 +181,7 @@
   <section class="view" id="cardView" hidden>
     <div class="card" id="card">
       <div class="brand">PrepHooks</div>
-      <div class="share-title" id="cardTitle">134</div>
+      <div class="title" id="cardTitle">134</div>
       <div class="subtitle" id="cardSubtitle">questions attempted in July 2026</div>
       <div class="powered">Powered by PrepHooks Nigeria Limited</div>
     </div>
@@ -200,16 +201,13 @@
 
   const TITLE_FLOOR = 40; // px — last-resort guard so it never overflows
 
-  // Fill the title to the card: grow as large as possible, then shrink
-  // only until it fits BOTH width and height (no overflow, maximal size).
-  function fitTitleToCard() {
+  // Safety guard: if cqi still overflows the card, shrink until it fits.
+  function guardTitle() {
     const cs = getComputedStyle(card);
-    const availW = card.clientWidth - parseFloat(cs.paddingLeft) * 2;
-    const availH = card.clientHeight - parseFloat(cs.paddingTop) * 2;
-    let size = 1000;
-    cardTitle.style.fontSize = size + 'px';
-    while ((cardTitle.scrollWidth > availW || cardTitle.scrollHeight > availH) && size > TITLE_FLOOR) {
-      size -= 4;
+    const maxW = card.clientWidth - parseFloat(cs.paddingLeft) * 2;
+    let size = parseFloat(getComputedStyle(cardTitle).fontSize);
+    while (cardTitle.scrollWidth > maxW && size > TITLE_FLOOR) {
+      size -= 2;
       cardTitle.style.fontSize = size + 'px';
     }
   }
@@ -223,13 +221,13 @@
 
     const safe = title.split('').map(ch => {
       const esc = ch.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-      if (highlight !== '' && ch === highlight) return `<span class="share-hl">${esc}</span>`;
+      if (highlight !== '' && ch === highlight) return `<span class="hl">${esc}</span>`;
       return esc;
     }).join('');
 
     cardTitle.innerHTML = safe;
     cardSub.textContent = subtitle;
-    fitTitleToCard();
+    guardTitle();
 
     formView.hidden = true;
     cardView.hidden = false;
@@ -242,7 +240,7 @@
 
   form.addEventListener('submit', (e) => { e.preventDefault(); render(); });
   editBtn.addEventListener('click', showForm);
-  window.addEventListener('resize', () => { if (!cardView.hidden) fitTitleToCard(); });
+  window.addEventListener('resize', () => { if (!cardView.hidden) guardTitle(); });
 </script>
 </body>
 </html>
