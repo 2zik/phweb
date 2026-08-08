@@ -10,8 +10,8 @@
     --grey: #888888;
     --grey-soft: #bdbdbd;
     --line: #e5e5e5;
-    --magenta: #e6007e;
-    --magenta-2: #ff4db0;
+    --primary: #FF203B;
+    --primary-2: #FF5C77;   /* lighter tint for the gradient */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -125,11 +125,11 @@
     font-size: clamp(100px, 58cqi, 320px);
   }
   .card .title .hl {
-    background: linear-gradient(100deg, var(--magenta) 0%, var(--magenta-2) 100%);
+    background: linear-gradient(100deg, var(--primary) 0%, var(--primary-2) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: var(--magenta);
+    color: var(--primary);
   }
   .card .subtitle {
     font-weight: 700;          /* matches index block h2 weight */
