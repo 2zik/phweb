@@ -7,6 +7,7 @@
 <style>
   :root {
     --ink: #1a1a1a;
+    --ink-soft: #555555;     /* soft black for the @username handle */
     --grey: #888888;
     --grey-soft: #bdbdbd;
     --line: #e5e5e5;
@@ -73,7 +74,6 @@
     outline: none;
     transition: border-color 0.15s;
     resize: vertical;
-    min-height: 96px;
     line-height: 1.45;
   }
   input[type="text"]:focus, textarea:focus { border-color: var(--ink); }
@@ -148,8 +148,8 @@
     margin-bottom: 4px;       /* sit close above the @username */
   }
   .card .username {
-    color: var(--ink);        /* black, recessive handle like TikTok */
-    font-weight: 600;
+    color: var(--ink-soft);   /* soft black handle */
+    font-weight: 500;
     font-size: clamp(14px, 5cqi, 50px);
     letter-spacing: -0.02em;
     /* 3x the normal card rhythm between the top group and the title */
