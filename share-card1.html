@@ -197,12 +197,28 @@
     max-width: 90%;
     font-size: clamp(12px, 7cqi, 50px);
   }
-  .card .powered {
-    color: var(--grey);
-    font-size: clamp(10px, 3cqi, 25px);
+  .card .footer3 {
     margin-top: auto;
     margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(2px, 1cqi, 8px);
+    text-align: center;
+  }
+  .card .footer3 .fline1,
+  .card .footer3 .fline2 {
+    color: var(--grey);
+    font-weight: 500;
+    font-size: clamp(11px, 3.2cqi, 22px);
+    letter-spacing: 0.01em;
+  }
+  .card .footer3 .fmini {
+    color: var(--grey-soft);
+    font-weight: 500;
+    font-size: clamp(9px, 2.4cqi, 16px);
     letter-spacing: 0.03em;
+    margin-top: clamp(4px, 1.5cqi, 12px);
   }
   .card-actions { margin-top: 28px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 </style>
@@ -255,7 +271,11 @@
       <div class="title" id="cardTitle">87%</div>
       <div class="subtitle" id="cardSubtitle">Nursing Process in July 2026.</div>
       <div class="subsubtitle" id="cardSub2">Top topic • 87% proficiency</div>
-      <div class="powered">Powered by PrepHooks Nigeria Limited</div>
+      <div class="footer3" id="cardFooter">
+        <div class="fline1">Effortless success.</div>
+        <div class="fline2">Get PrepHooks free on Android &amp; iOS.</div>
+        <div class="fmini">Powered by PrepHooks</div>
+      </div>
     </div>
     <div class="card-actions">
       <button type="button" class="btn btn-outline" id="downloadBtn">Download</button>
@@ -302,11 +322,12 @@
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, w, h);
 
-    // Brand + username + powered + caption: simple centered single-line text
+    // Brand + username + caption: simple centered single-line text
     drawSimpleText(ctx, card.querySelector('.brand'), cardRect);
     drawSimpleText(ctx, card.querySelector('.username'), cardRect);
     drawSimpleText(ctx, card.querySelector('.subsubtitle'), cardRect);
-    drawSimpleText(ctx, card.querySelector('.powered'), cardRect);
+    // Footer (3 lines: 2-line message + mini attribution)
+    drawFooter(ctx, card.querySelector('#cardFooter'), cardRect);
     // Subtitle: wrap to multiple centered lines (matches DOM wrapping)
     drawWrappedText(ctx, card.querySelector('.subtitle'), cardRect);
 
@@ -336,6 +357,49 @@
     const cy = (r.top - cardRect.top) + r.height / 2;
     ctx.fillText(el.textContent.trim(), cx, cy);
     ctx.letterSpacing = 'normal';
+  }
+
+  // Draw the multi-line card footer (fline1 / fline2 / fmini) as a stacked
+  // block, honoring each child's computed font/size/color.
+  function drawFooter(ctx, el, cardRect) {
+    if (!el) return;
+    const cs = getComputedStyle(el);
+    const r = el.getBoundingClientRect();
+    const lines = Array.from(el.children);
+    if (!lines.length) return;
+
+    // Build each line's geometry from its own computed style
+    const measured = lines.map(lineEl => {
+      const lcs = getComputedStyle(lineEl);
+      ctx.font = `${lcs.fontWeight} ${lcs.fontSize} ${lcs.fontFamily}`;
+      return {
+        el: lineEl,
+        text: lineEl.textContent.trim(),
+        fontSize: parseFloat(lcs.fontSize),
+        color: lcs.color,
+        ls: (lcs.letterSpacing && lcs.letterSpacing !== 'normal') ? parseFloat(lcs.letterSpacing) : 0,
+        gap: parseFloat(lcs.marginTop) || 0,
+      };
+    });
+
+    // Total block height = sum of line heights + inter-line gaps
+    const heights = measured.map(m => m.fontSize * 1.2);
+    const gaps = measured.map((m, i) => i === 0 ? 0 : m.gap);
+    const totalH = heights.reduce((a, b) => a + b, 0) + gaps.reduce((a, b) => a + b, 0);
+
+    let cy = (r.top - cardRect.top) + r.height / 2 - totalH / 2 + heights[0] / 2;
+    const cx = (r.left - cardRect.left) + r.width / 2;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    measured.forEach((m, i) => {
+      cy += gaps[i] / 2;
+      ctx.font = `${getComputedStyle(m.el).fontWeight} ${getComputedStyle(m.el).fontSize} ${getComputedStyle(m.el).fontFamily}`;
+      ctx.fillStyle = m.color;
+      ctx.letterSpacing = m.ls ? m.ls + 'px' : 'normal';
+      ctx.fillText(m.text, cx, cy);
+      ctx.letterSpacing = 'normal';
+      cy += heights[i] / 2;
+    });
   }
 
   function drawWrappedText(ctx, el, cardRect) {
