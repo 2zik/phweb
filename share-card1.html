@@ -77,6 +77,33 @@
     line-height: 1.45;
   }
   input[type="text"]:focus, textarea:focus { border-color: var(--ink); }
+
+  /* text input with a constant "@" prefix (username field) */
+  .input-prefix {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .input-prefix:focus-within { border-color: var(--ink); }
+  .input-prefix .prefix {
+    display: flex;
+    align-items: center;
+    padding: 0 4px 0 14px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--grey);
+    background: #fff;
+    user-select: none;
+  }
+  .input-prefix input[type="text"] {
+    border: none;
+    border-radius: 0;
+    flex: 1;
+  }
+  .input-prefix input[type="text"]:focus { border-color: transparent; }
   .hint { font-size: 11px; color: var(--grey); margin-top: 6px; line-height: 1.4; }
 
   button { font-family: inherit; cursor: pointer; }
@@ -117,9 +144,16 @@
     font-weight: 700;
     font-size: clamp(20px, 8.5cqi, 85px);
     letter-spacing: -0.01em;
-    /* 3x the normal card rhythm (~32px -> ~96px) between brand and title */
-    margin-bottom: clamp(48px, 14cqi, 310px);
     margin-top: clamp(24px, 5cqi, 100px);
+    margin-bottom: 4px;       /* sit close above the @username */
+  }
+  .card .username {
+    color: var(--ink);        /* black, recessive handle like TikTok */
+    font-weight: 600;
+    font-size: clamp(14px, 5cqi, 50px);
+    letter-spacing: -0.02em;
+    /* 3x the normal card rhythm between the top group and the title */
+    margin-bottom: clamp(48px, 14cqi, 310px);
   }
   .card .title {
     /* Very bold, index-page heading weight language */
@@ -183,6 +217,14 @@
         <div class="hint">The big number or headline text on the card.</div>
       </div>
       <div class="field">
+        <label for="username">Username</label>
+        <div class="input-prefix">
+          <span class="prefix">@</span>
+          <input type="text" id="username" placeholder="Chukwuma678" value="Chukwuma678" />
+        </div>
+        <div class="hint">Shown beneath the brand, like a TikTok handle. The "@" is added automatically.</div>
+      </div>
+      <div class="field">
         <label for="subtitle">Subtitle</label>
         <textarea id="subtitle" placeholder="e.g. Nursing Process in July 2026. (use line breaks for multiple lines)">Nursing Process in July 2026.</textarea>
       </div>
@@ -206,6 +248,7 @@
   <section class="view" id="cardView" hidden>
     <div class="card" id="card">
       <div class="brand">PrepHooks</div>
+      <div class="username" id="cardUsername">@Chukwuma678</div>
       <div class="title" id="cardTitle">87%</div>
       <div class="subtitle" id="cardSubtitle">Nursing Process in July 2026.</div>
       <div class="subsubtitle" id="cardSub2">Top topic • 87% proficiency</div>
@@ -224,6 +267,7 @@
   const cardTitle = document.getElementById('cardTitle');
   const cardSub   = document.getElementById('cardSubtitle');
   const cardSub2  = document.getElementById('cardSub2');
+  const cardUser  = document.getElementById('cardUsername');
   const card      = document.getElementById('card');
   const editBtn   = document.getElementById('editBtn');
   const downloadBtn = document.getElementById('downloadBtn');
@@ -255,8 +299,9 @@
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, w, h);
 
-    // Brand + powered + caption: simple centered single-line text
+    // Brand + username + powered + caption: simple centered single-line text
     drawSimpleText(ctx, card.querySelector('.brand'), cardRect);
+    drawSimpleText(ctx, card.querySelector('.username'), cardRect);
     drawSimpleText(ctx, card.querySelector('.subsubtitle'), cardRect);
     drawSimpleText(ctx, card.querySelector('.powered'), cardRect);
     // Subtitle: wrap to multiple centered lines (matches DOM wrapping)
@@ -414,6 +459,10 @@
     cardTitle.innerHTML = safe;
     cardSub.textContent = subtitle;
     cardSub2.textContent = sub2;
+
+    // Username: constant "@" prefix (strip any user-typed "@" to avoid doubles).
+    const rawUser = document.getElementById('username').value.trim().replace(/^@+/, '');
+    cardUser.textContent = rawUser ? '@' + rawUser : '';
 
     // Make the card visible BEFORE measuring — guardTitle needs the real
     // clientWidth/clientHeight (a hidden display:none card reports 0).
