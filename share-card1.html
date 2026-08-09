@@ -173,6 +173,10 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: var(--primary);
+    /* Negative letter-spacing clips the LAST glyph's right edge with
+       background-clip:text. padding-right extends the paint box so the full
+       glyph shows. (The PNG export centers by card width, ignoring this.) */
+    padding-right: 0.18em;
   }
   .card .subtitle {
     font-weight: 800;          /* bolder */
@@ -388,10 +392,16 @@
     const ls = (cs.letterSpacing && cs.letterSpacing !== 'normal') ? parseFloat(cs.letterSpacing) : 0;
     const chars = el.textContent.split('');
     const widths = chars.map(c => ctx.measureText(c).width);
-    const total = widths.reduce((a, b) => a + b, 0) + ls * Math.max(0, chars.length - 1);
+    // Add a small right buffer so the last (often highlighted) glyph's stroke
+    // isn't clipped at the canvas edge under negative letter-spacing.
+    const tailPad = 0.12 * fontSize;
+    const total = widths.reduce((a, b) => a + b, 0) + ls * Math.max(0, chars.length - 1) + tailPad;
 
-    // Horizontal center of the run, relative to the (already centered) title box
-    let x = (r.left - cardRect.left) + (r.width - total) / 2;
+    // Center within the card with a horizontal safety margin (in card px) so
+    // the title never hugs the edge and the highlighted glyph isn't clipped.
+    const sideMargin = Math.max(24, fontSize * 0.12);
+    const avail = cardRect.width - sideMargin * 2;
+    let x = sideMargin + (avail - total) / 2;
     const cy = (r.top - cardRect.top) + r.height / 2;
 
     const hl = document.getElementById('highlight').value;
