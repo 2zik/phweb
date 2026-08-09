@@ -61,7 +61,7 @@
     color: var(--ink);
     margin-bottom: 8px;
   }
-  input[type="text"] {
+  input[type="text"], textarea {
     width: 100%;
     padding: 12px 14px;
     font-size: 15px;
@@ -72,8 +72,11 @@
     border-radius: 10px;
     outline: none;
     transition: border-color 0.15s;
+    resize: vertical;
+    min-height: 96px;
+    line-height: 1.45;
   }
-  input[type="text"]:focus { border-color: var(--ink); }
+  input[type="text"]:focus, textarea:focus { border-color: var(--ink); }
   .hint { font-size: 11px; color: var(--grey); margin-top: 6px; line-height: 1.4; }
 
   button { font-family: inherit; cursor: pointer; }
@@ -112,22 +115,24 @@
   .card .brand {
     color: var(--grey);
     font-weight: 700;
-    font-size: clamp(18px, 3vw, 20px);
-    letter-spacing: 0.04em;
+    font-size: clamp(20px, 8.5cqi, 85px);
+    letter-spacing: -0.01em;
     /* 3x the normal card rhythm (~32px -> ~96px) between brand and title */
-    margin-bottom: clamp(48px, 14cqi, 110px);
+    margin-bottom: clamp(48px, 14cqi, 310px);
+    margin-top: clamp(24px, 5cqi, 100px);
   }
   .card .title {
     /* Very bold, index-page heading weight language */
     font-weight: 800;
-    letter-spacing: -0.03em;   /* index hero/block h1/h2 tracking */
+    letter-spacing: -0.07em;   /* index hero/block h1/h2 tracking */
     line-height: 1.05;
     color: var(--ink);
     white-space: nowrap;
     width: 100%;               /* span card so the box centers for export */
     text-align: center;
     /* cqi = % of the CARD's own width: stays proportional at any size, no overflow */
-    font-size: clamp(100px, 75cqi, 180px);
+    font-size: clamp(100px, 75cqi, 170px);
+    
   }
   .card .title .hl {
     background: linear-gradient(100deg, var(--primary) 0%, var(--primary-2) 100%);
@@ -138,27 +143,29 @@
   }
   .card .subtitle {
     font-weight: 800;          /* bolder */
-    letter-spacing: -0.04em;   /* tighter tracking */
+    letter-spacing: -0.08em;   /* tighter tracking */
     color: var(--ink);
     margin-top: 10px;
-    line-height: 1.15;         /* safe: tight but glyphs don't collide */
+    line-height: 1.0;         /* safe: tight but glyphs don't collide */
     max-width: 92%;
-    font-size: clamp(20px, 12cqi, 56px);   /* bigger, raised cap for high-res export */
+    font-size: clamp(20px, 12cqi, 100px);   /* bigger, raised cap for high-res export */
+    white-space: pre-line;    /* honor manual line breaks from the textarea */
   }
   .card .subsubtitle {
     font-weight: 500;          /* lighter than the subtitle */
     letter-spacing: -0.02em;   /* tighter tracking */
-    color: var(--grey);        /* recessive, like the sample */
+    color: var(--ink);        /* recessive, like the sample */
     margin-top: 9px;           /* a little more separation from the subtitle above */
     line-height: 1.15;         /* safe: tight but glyphs don't collide */
     max-width: 90%;
-    font-size: clamp(12px, 5cqi, 17px);
+    font-size: clamp(12px, 7cqi, 50px);
   }
   .card .powered {
     color: var(--grey);
-    font-size: clamp(10px, 1.5vw, 13px);
+    font-size: clamp(10px, 3cqi, 25px);
     margin-top: auto;
-    letter-spacing: 0.02em;
+    margin-bottom: auto;
+    letter-spacing: 0.03em;
   }
   .card-actions { margin-top: 28px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 </style>
@@ -177,7 +184,7 @@
       </div>
       <div class="field">
         <label for="subtitle">Subtitle</label>
-        <input type="text" id="subtitle" placeholder="e.g. Nursing Process in July 2026." value="Nursing Process in July 2026." />
+        <textarea id="subtitle" placeholder="e.g. Nursing Process in July 2026. (use line breaks for multiple lines)">Nursing Process in July 2026.</textarea>
       </div>
       <div class="field">
         <label for="subsubtitle">Caption (small line)</label>
@@ -295,19 +302,24 @@
 
     const maxW = r.width;
     const lineHeight = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.15;
-    const words = el.textContent.trim().split(/\s+/);
+    // Honour manual line breaks (\n) from a textarea, then word-wrap each.
+    const paragraphs = el.textContent.split('\n');
     const lines = [];
-    let line = '';
-    words.forEach(word => {
-      const test = line ? line + ' ' + word : word;
-      if (ctx.measureText(test).width > maxW && line) {
-        lines.push(line);
-        line = word;
-      } else {
-        line = test;
-      }
+    paragraphs.forEach(para => {
+      const words = para.split(/\s+/).filter(w => w.length);
+      if (words.length === 0) { lines.push(''); return; }
+      let line = '';
+      words.forEach(word => {
+        const test = line ? line + ' ' + word : word;
+        if (ctx.measureText(test).width > maxW && line) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = test;
+        }
+      });
+      if (line) lines.push(line);
     });
-    if (line) lines.push(line);
 
     // Vertical-center the block within the subtitle box
     const totalH = lines.length * lineHeight;
