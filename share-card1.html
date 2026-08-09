@@ -390,6 +390,11 @@
       size -= 4;
       cardTitle.style.fontSize = size + 'px';
     }
+
+    // Final pass: shrink the fitted title by 5% for a little more breathing
+    // room (smaller title never causes overflow).
+    size *= 0.95;
+    cardTitle.style.fontSize = size + 'px';
   }
 
   function render() {
