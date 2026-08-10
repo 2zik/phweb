@@ -138,13 +138,24 @@
     /* REQUIRED for cqi units below to work — container-relative sizing. */
     container-type: inline-size;
   }
+  .card .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(6px, 2cqi, 18px);
+    margin-top: clamp(24px, 5cqi, 100px);
+    margin-bottom: 4px;
+  }
+  .card .brand-logo {
+    height: clamp(22px, 8cqi, 80px);
+    width: auto;
+    display: block;
+  }
   .card .brand {
     color: var(--grey);
     font-weight: 700;
-    font-size: clamp(20px, 8.5cqi, 85px);
+    font-size: clamp(16px, 6cqi, 60px);
     letter-spacing: -0.01em;
-    margin-top: clamp(24px, 5cqi, 100px);
-    margin-bottom: 4px;       /* sit close above the @username */
   }
   .card .username {
     color: var(--grey-soft);   /* soft grey handle */
@@ -266,7 +277,10 @@
   <!-- ===== CARD VIEW ===== -->
   <section class="view" id="cardView" hidden>
     <div class="card" id="card">
-      <div class="brand">PrepHooks</div>
+      <div class="brand-row">
+        <img class="brand-logo" src="assets/utilities/hooky-blob.png" alt="" />
+        <div class="brand">PrepHooks</div>
+      </div>
       <div class="username" id="cardUsername">@Chukwuma678</div>
       <div class="title" id="cardTitle">87%</div>
       <div class="subtitle" id="cardSubtitle">Nursing Process in July 2026.</div>
@@ -296,11 +310,14 @@
 
   // Render the card to a PNG by drawing the live DOM elements onto a canvas.
   // (More reliable than SVG <foreignObject>, which drops CSS + gradient text.)
-  function downloadCard() {
+  async function downloadCard() {
     // Render at a FIXED high-res width, independent of the on-screen card size,
     // so the PNG is sharp everywhere (phones would otherwise export ~750px).
     const EXPORT_W = Math.max(card.getBoundingClientRect().width, 1080);
     const scale = 3; // 3x for crisp output
+
+    // Preload the Hooky logo so the export can draw it (await so it's ready).
+    await preloadHooky('assets/utilities/hooky-blob.png');
 
     // Temporarily expand the card to the export width and re-fit the title.
     const savedWidth = card.style.width;
@@ -321,8 +338,8 @@
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, w, h);
 
-    // Brand + username + caption: simple centered single-line text
-    drawSimpleText(ctx, card.querySelector('.brand'), cardRect);
+    // Brand row: Hooky blob image + "PrepHooks" text inline
+    drawBrandRow(ctx, card.querySelector('.brand-row'), cardRect);
     drawSimpleText(ctx, card.querySelector('.username'), cardRect);
     drawSimpleText(ctx, card.querySelector('.subsubtitle'), cardRect);
     // Footer (3 lines: 2-line message + mini attribution)
@@ -356,6 +373,52 @@
     const cy = (r.top - cardRect.top) + r.height / 2;
     ctx.fillText(el.textContent.trim(), cx, cy);
     ctx.letterSpacing = 'normal';
+  }
+
+  // Draw the brand row: Hooky blob image + "PrepHooks" text, inline + centered.
+  let _hookyImg = null;
+  function drawBrandRow(ctx, el, cardRect) {
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const logo = el.querySelector('.brand-logo');
+    const brand = el.querySelector('.brand');
+    const lcs = logo ? getComputedStyle(logo) : null;
+    const bcs = getComputedStyle(brand);
+    const cy = (r.top - cardRect.top) + r.height / 2;
+
+    let logoH = 0, logoW = 0;
+    if (logo && _hookyImg && _hookyImg.complete) {
+      logoH = parseFloat(lcs.height);
+      logoW = logoH * (_hookyImg.naturalWidth / _hookyImg.naturalHeight);
+    }
+    ctx.font = `${bcs.fontWeight} ${bcs.fontSize} ${bcs.fontFamily}`;
+    ctx.letterSpacing = bcs.letterSpacing || 'normal';
+    const text = brand.textContent.trim();
+    const textW = ctx.measureText(text).width + (bcs.letterSpacing === 'normal' ? 0 : parseFloat(bcs.letterSpacing) * (text.length - 1));
+    const gap = parseFloat(getComputedStyle(el).gap) || 0;
+    const totalW = logoW + gap + textW;
+    let x = (r.left - cardRect.left) + r.width / 2 - totalW / 2;
+
+    if (logo && _hookyImg && _hookyImg.complete) {
+      const logoY = cy - logoH / 2;
+      ctx.drawImage(_hookyImg, x, logoY, logoW, logoH);
+      x += logoW + gap;
+    }
+    ctx.fillStyle = bcs.color;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    ctx.fillText(text, x, cy);
+    ctx.letterSpacing = 'normal';
+  }
+
+  // Preload the Hooky image once so the export can draw it.
+  function preloadHooky(src) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => { _hookyImg = img; resolve(); };
+      img.onerror = () => { _hookyImg = null; resolve(); };
+      img.src = src;
+    });
   }
 
   // Draw the multi-line card footer (fline1 / fline2 / fmini) as a stacked
