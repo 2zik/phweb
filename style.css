@@ -180,6 +180,38 @@ header {
     padding: 88px 24px 56px;
 }
 
+/* Full-bleed image band: escapes the centered container and runs to both
+   viewport edges, but capped at 1280px so it never stretches into a thin
+   panorama on very wide landscape screens. */
+.fullbleed {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 1280px;
+    margin: 56px auto 0;
+}
+.fullbleed .hero-media {
+    display: block;
+    width: 100%;
+    height: clamp(280px, 38vw, 460px);
+    object-fit: cover;
+    background: linear-gradient(135deg, #e9edf2 0%, #d7dde6 55%, #c9cfd9 100%);
+}
+
+/* Contained editorial image (used in interior two-column sections) */
+.media-card {
+    border-radius: 2.5px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e9edf2 0%, #d7dde6 55%, #c9cfd9 100%);
+}
+.media-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .hero .eyebrow {
     font-size: 16px;
     font-weight: 600;
