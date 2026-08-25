@@ -805,10 +805,19 @@ html.embed-mode footer {
 }
 
 /* In embedded mode the header is gone, so the sticky sub-nav should
-   stick to the very top (0) instead of the 81px header offset, and
-   anchors should scroll flush to the top. */
+   pin to the very top. We use position: fixed (NOT sticky) because many
+   native app webviews scroll an inner container, where position: sticky
+   silently fails to engage. A spacer is injected by the embed script to
+   keep content from sliding underneath the fixed bar. */
 html.embed-mode .subnav {
-    top: 0 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+}
+html.embed-mode .subnav-spacer {
+    display: block;
 }
 html.embed-mode section.about {
     scroll-margin-top: 0 !important;

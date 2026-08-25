@@ -12,6 +12,26 @@
                 var origin = params.get('origin');
                 if (origin && origin.toLowerCase() === 'app') {
                     document.documentElement.classList.add('embed-mode');
+                    // Pin the in-page sub-nav as a fixed bar and reserve space
+                    // for it with a spacer, so content never slides underneath.
+                    function pinSubnav() {
+                        var sub = document.querySelector('.subnav');
+                        if (!sub) return;
+                        var spacer = document.querySelector('.subnav-spacer');
+                        if (!spacer) {
+                            spacer = document.createElement('div');
+                            spacer.className = 'subnav-spacer';
+                            sub.parentNode.insertBefore(spacer, sub.nextSibling);
+                        }
+                        spacer.style.height = sub.offsetHeight + 'px';
+                    }
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', pinSubnav);
+                    } else {
+                        pinSubnav();
+                    }
+                    window.addEventListener('resize', pinSubnav);
+                    window.addEventListener('load', pinSubnav);
                 }
             } catch (e) {}
         })();
