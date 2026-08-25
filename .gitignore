@@ -14,3 +14,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# local preview artifacts
+preview_*.png
+dl_*.png
