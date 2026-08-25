@@ -804,6 +804,16 @@ html.embed-mode footer {
     display: none !important;
 }
 
+/* In embedded mode the header is gone, so the sticky sub-nav should
+   stick to the very top (0) instead of the 81px header offset, and
+   anchors should scroll flush to the top. */
+html.embed-mode .subnav {
+    top: 0 !important;
+}
+html.embed-mode section.about {
+    scroll-margin-top: 0 !important;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
     header {
