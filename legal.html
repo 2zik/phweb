@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Legal & Privacy — PrepHooks</title>
     <link rel="stylesheet" href="style.css" />
+    <script>
+        (function () {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                var origin = params.get('origin');
+                if (origin && origin.toLowerCase() === 'app') {
+                    document.documentElement.classList.add('embed-mode');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <style>
         /* Additional page-specific tweaks */
         .hero {

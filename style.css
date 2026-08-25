@@ -795,6 +795,15 @@ footer {
     text-align: center;
 }
 
+/* ---------- Embedded / in-app mode ----------
+   When the page is opened from inside the PrepHooks app (?origin=app),
+   the global header (app bar) and footer are hidden so the content
+   fills the native webview. */
+html.embed-mode header,
+html.embed-mode footer {
+    display: none !important;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
     header {

@@ -6,6 +6,17 @@
     <title>Download PrepHooks — Get the app for Android and iPhone</title>
     <link rel="icon" href="assets/utilities/favicon.webp" />
     <link rel="stylesheet" href="style.css" />
+    <script>
+        (function () {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                var origin = params.get('origin');
+                if (origin && origin.toLowerCase() === 'app') {
+                    document.documentElement.classList.add('embed-mode');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <style>
         /* ===== Download page (built on the shared tokens in style.css) ===== */
 
