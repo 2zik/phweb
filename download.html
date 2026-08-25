@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download PrepHooks — Get the app for Android and iPhone</title>
+    <link rel="icon" href="assets/utilities/favicon.webp" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* ===== Download page (built on the shared tokens in style.css) ===== */
+
+        .dl-hero {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 88px 24px 24px;
+            text-align: center;
+        }
+        .dl-motif {
+            display: block;
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 26px;
+            object-fit: contain;
+        }
+        .dl-hero h1 {
+            font-size: clamp(38px, 6vw, 58px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+            max-width: 16ch;
+            margin: 0 auto;
+        }
+        .dl-hero p {
+            margin: 22px auto 0;
+            max-width: 56ch;
+            font-size: 19px;
+            color: #666666;
+        }
+        .dl-hero .exam-tags {
+            font-size: 15px;
+            color: #888888;
+            letter-spacing: 0.02em;
+            margin-top: 28px;
+        }
+
+        /* Download section */
+        .dl-section {
+            background: #f7f7f7;
+            padding: 72px 24px 96px;
+            text-align: center;
+        }
+        .dl-section .inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .dl-section .sec-label {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #888888;
+            margin-bottom: 12px;
+        }
+        .dl-section h2 {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+        .dl-section .sec-sub {
+            font-size: 17px;
+            color: #666666;
+            max-width: 52ch;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+        }
+
+        .dl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 860px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .dl-card {
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 3px;
+            padding: 36px 34px;
+            display: flex;
+            flex-direction: column;
+        }
+        .dl-card .plat {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .dl-card .plat svg {
+            width: 30px;
+            height: 30px;
+            color: #1a1a1a;
+            flex-shrink: 0;
+        }
+        .dl-card .plat h3 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .dl-card .ver {
+            font-size: 14px;
+            color: #888888;
+            margin-bottom: 14px;
+        }
+        .dl-card .ver b {
+            color: #FF203B;
+            font-weight: 700;
+        }
+        .dl-card p.desc {
+            font-size: 16px;
+            color: #4b4b4b;
+            line-height: 1.65;
+            margin-bottom: 24px;
+            flex: 1;
+        }
+        .dl-card .cta-row {
+            margin-top: 4px;
+        }
+        .dl-card .btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        .dl-card .req {
+            font-size: 13px;
+            color: #999999;
+            margin-top: 16px;
+        }
+
+        .dl-note {
+            max-width: 860px;
+            margin: 40px auto 0;
+            text-align: left;
+        }
+        .gray-card p.emphasis {
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.01em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 720px) {
+            .dl-hero {
+                padding: 60px 20px 16px;
+            }
+            .dl-grid {
+                grid-template-columns: 1fr;
+            }
+            .dl-section {
+                padding: 56px 20px 72px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">PrepHooks</a>
+            <nav class="top-nav" id="topNav">
+                <a href="about.html">About</a>
+                <a href="market.html">Why PrepHooks</a>
+                <a href="help.html">Help</a>
+                <a href="legal.html">Legal</a>
+                <a href="download.html" class="nav-cta">Download</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <div class="dl-hero">
+        <img src="assets/utilities/hooky.webp" alt="PrepHooks mascot" class="dl-motif" />
+        <h1>Get PrepHooks. Start preparing.</h1>
+        <p>We are not on Google Play yet, so grab the app straight from here. This is always the latest build, with no store review wait.</p>
+        <p class="exam-tags">For: JAMB · WAEC · NMCN · MDCN · NECO + MORE</p>
+    </div>
+
+    <!-- ===== DOWNLOAD SECTION ===== -->
+    <div class="dl-section">
+        <div class="inner">
+            <div class="sec-label">Download</div>
+            <h2>Pick your device</h2>
+            <p class="sec-sub">Choose your platform below and install PrepHooks in a minute. Both builds are free to download.</p>
+
+            <div class="dl-grid">
+
+                <!-- ===== Android (APK) ===== -->
+                <div class="dl-card">
+                    <div class="plat">
+                        <!-- Android robot -->
+                        <svg viewBox="0 0 576 512" fill="currentColor" aria-hidden="true">
+                            <path d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55"/>
+                        </svg>
+                        <h3>Android</h3>
+                    </div>
+                    <div class="ver">Latest <b>v2.4.1</b> · 24 MB · APK</div>
+                    <p class="desc">Install PrepHooks directly. Open the file on your phone and allow installs from unknown sources when prompted.</p>
+                    <div class="cta-row">
+                        <!-- TODO: replace href with the hosted APK URL -->
+                        <a href="#" class="btn btn-primary">Download APK</a>
+                    </div>
+                    <div class="req">Requires Android 8.0 or later.</div>
+                </div>
+
+                <!-- ===== iPhone (iOS) ===== -->
+                <div class="dl-card">
+                    <div class="plat">
+                        <!-- Apple logo -->
+                        <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true">
+                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                        </svg>
+                        <h3>iPhone</h3>
+                    </div>
+                    <div class="ver">Latest <b>v2.4.1</b> · 32 MB · iOS</div>
+                    <p class="desc">Get PrepHooks for iPhone. We are finalizing App Store access, so builds are shared directly for now.</p>
+                    <div class="cta-row">
+                        <!-- TODO: replace href with the TestFlight or hosted IPA URL -->
+                        <a href="#" class="btn btn-primary">Download for iPhone</a>
+                    </div>
+                    <div class="req">iOS 15 or later. May use TestFlight.</div>
+                </div>
+
+            </div>
+
+            <!-- Why direct download -->
+            <div class="dl-note">
+                <div class="gray-card">
+                    <p class="emphasis">Why download from here?</p>
+                    <p>PrepHooks is not on Google Play yet. Downloading directly gives you the newest build the moment it ships, with no store review wait. Every version here is free and safe to install.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <a href="index.html" class="logo" style="font-size:18px;">PrepHooks</a>
+            <nav class="footer-nav">
+                <a href="about.html">About</a>
+                <a href="help.html">Help</a>
+                <a href="legal.html">Legal</a>
+            </nav>
+            <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        const toggle = document.getElementById('navToggle');
+        const nav = document.getElementById('topNav');
+        if (toggle && nav) {
+            toggle.addEventListener('click', () => nav.classList.toggle('open'));
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => nav.classList.remove('open'));
+            });
+        }
+    </script>
+
+</body>
+</html>
