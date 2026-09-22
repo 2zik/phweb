@@ -3,167 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PrepHooks — Get the app</title>
+    <title>Download PrepHooks</title>
     <link rel="icon" href="assets/utilities/favicon.webp" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        /* ===== Download page — informational hooky style ===== */
-
-        .dl-hero {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 72px 24px 16px;
-            text-align: center;
-        }
-        .dl-motif {
-            display: block;
-            width: 88px;
-            height: 88px;
-            margin: 0 auto 24px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .dl-hero h1 {
-            font-size: clamp(34px, 5vw, 48px);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.08;
-            max-width: 16ch;
-            margin: 0 auto;
-        }
-        .dl-hero p {
-            margin: 14px auto 0;
-            max-width: 52ch;
-            font-size: 18px;
-            color: #666666;
-        }
-
-        /* informational card — soft, hooky rhythm */
-        .dl-info {
-            max-width: 520px;
-            margin: 32px auto 0;
-            padding: 48px 24px 56px;
-            text-align: center;
-            position: relative;
-            overflow: visible;
-        }
-        .dl-info .inner {
-            position: relative;
-            z-index: 1;
-        }
-        .dl-info-icon {
-            display: block;
-            margin: 0 auto 24px;
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            object-fit: contain;
-        }
-        .dl-info-icon-wrap {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 24px;
-            width: 120px;
-            height: 120px;
-        }
-        .dl-info-icon-wrap::after {
-            content: "";
-            position: absolute;
-            top: 56%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 180px;
-            background: linear-gradient(to bottom,
-                rgba(255,32,59,0.09) 0%,
-                rgba(255,32,59,0.04) 30%,
-                rgba(255,32,59,0.015) 50%,
-                transparent 78%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .dl-info-icon {
-            width: 56px;
-            height: 56px;
-            object-fit: contain;
-            display: block;
-            position: relative;
-            z-index: 1;
-        }
-        .dl-info h2 {
-            font-size: clamp(26px, 4vw, 34px);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            color: #1a1a1a;
-            margin: 0 0 12px;
-        }
-        .dl-info p {
-            margin: 0 auto;
-            max-width: 440px;
-            font-size: 16px;
-            color: #555555;
-            line-height: 1.6;
-        }
-        .dl-info .cta-row {
-            margin-top: 24px;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .dl-info .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 13px 28px;
-            border-radius: 999px;
-            font-weight: 500;
-            font-size: 15px;
-            letter-spacing: -0.01em;
-            border: 1px solid transparent;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-            transition: background .2s, border .2s;
-        }
-        .dl-info .btn:active { transform: scale(.98); }
-        .dl-info .btn-primary {
-            background: #1a1a1a;
-            color: #ffffff;
-            border-color: #1a1a1a;
-        }
-        .dl-info .btn-primary:hover { background: #333333; }
-        .dl-info .btn-outline {
-            background: #fff;
-            color: #1a1a1a;
-            border-color: #d0d0d0;
-        }
-        .dl-info .btn-outline:hover { background: #f5f5f5; }
-
-        .dl-footer-note {
-            max-width: 520px;
-            margin: 48px auto 0;
-            text-align: center;
-            font-size: 13px;
-            color: #999999;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 720px) {
-            .dl-hero { padding: 56px 20px 12px; }
-            .dl-info { padding: 32px 20px 40px; }
-        }
-
-        /* keep existing dl-card styles scoped so they don't leak */
-        .dl-card, .dl-grid, .dl-section { display: none; }
+        .dl-note{max-width:520px;margin:48px auto 0;padding:0 24px;text-align:center;font-size:14px;color:#555555;line-height:1.7}
+        @media(max-width:720px){.dl-note{margin-top:32px}}
     </style>
 </head>
 <body>
-
     <header>
         <div class="header-inner">
             <a href="index.html" class="logo">PrepHooks</a>
@@ -179,35 +27,23 @@
             </button>
         </div>
     </header>
-
-    <div class="dl-hero">
-        <img src="assets/utilities/logo.webp" alt="PrepHooks" class="dl-motif" />
-        <h1>Get PrepHooks</h1>
-        <p>Your exam prep, built for real results.</p>
-    </div>
-
-    <div class="dl-info">
-        <div class="inner">
-            <div class="dl-info-icon-wrap">
-                <img src="assets/utilities/hooky.webp" alt="" class="dl-info-icon" loading="lazy" />
-            </div>
-            <h2>Now live on Google Play</h2>
-            <p>Update to the latest version from the link below — the same one you joined the closed test with.</p>
-            <div class="cta-row">
-                <a href="https://play.google.com/store/apps/details?id=com.prephooks.prephooks"
-                   target="_blank" rel="noopener noreferrer"
-                   onclick="window.open(this.href, '_blank'); return true;"
-                   class="btn btn-primary">Get on Google Play</a>
-                <a href="#" class="btn btn-outline" style="pointer-events:none; opacity:.6;">App Store · Coming soon</a>
-            </div>
+    <main>
+        <div class="dl-note">
+            <p>Requires Android 8.0 or later.</p>
+            <p>PrepHooks Nigeria Limited &copy; 2026.</p>
         </div>
-    </div>
-
-    <div class="dl-footer-note">
-        Requires Android 8.0 or later.<br>
-        PrepHooks Nigeria Limited &copy; 2026.
-    </div>
-
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <a href="index.html" class="logo" style="font-size:18px;">PrepHooks</a>
+            <nav class="footer-nav">
+                <a href="about.html">About</a>
+                <a href="help.html">Help</a>
+                <a href="legal.html">Legal</a>
+            </nav>
+            <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
+        </div>
+    </footer>
     <script>
         const toggle = document.getElementById('navToggle');
         const nav = document.getElementById('topNav');
@@ -218,6 +54,5 @@
             });
         }
     </script>
-
 </body>
 </html>
