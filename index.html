@@ -1,340 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PrepHooks — Test to learn</title>
-    <link rel="stylesheet" href="style.css" />
-    <script>
-        (function () {
-            try {
-                var params = new URLSearchParams(window.location.search);
-                var origin = params.get('origin');
-                if (origin && origin.toLowerCase() === 'app') {
-                    document.documentElement.classList.add('embed-mode');
-                }
-            } catch (e) {}
-        })();
-    </script>
-        <style>
-        /* Additional page-specific tweaks */
-        .hero {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 88px 24px 56px;
-    text-align: center; /* centers all text inside */
-}
-        .hero .eyebrow {
-            font-size: 16px;
-            font-weight: 600;
-            color: #888888;
-            margin-bottom: 20px;
-        }
-        .hero h1 {
-            font-size: clamp(38px, 6vw, 58px);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.08;
-            max-width: 14ch;
-            margin: 0 auto; /* center the constrained headline block */
-        }
-        .hero p {
-            margin: 22px auto 0;
-            max-width: 56ch;
-            font-size: 19px;
-            color: #666666;
-        }
-
-        .subnav {
-            border-top: 1px solid #eeeeee;
-            border-bottom: 1px solid #eeeeee;
-            position: sticky;
-            top: 81px;
-            background: #ffffff;
-            z-index: 40;
-        }
-        .subnav .inner {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 16px 24px;
-            display: flex;
-            gap: 28px;
-            overflow-x: auto;
-        }
-        .subnav a {
-            font-size: 15px;
-            font-weight: 600;
-            color: #888888;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-        .subnav a:hover,
-        .subnav a.active {
-            color: #1a1a1a;
-        }
-
-        .wrap {
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        section.doc {
-            padding: 80px 0;
-            border-bottom: 1px solid #eeeeee;
-            scroll-margin-top: 150px;
-        }
-        section.doc:last-of-type {
-            border-bottom: none;
-        }
-section{
-    text-align: center;
-}
-
-        .doc-label {
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: #888888;
-            margin-bottom: 14px;
-        }
-
-        .doc h2 {
-            font-size: clamp(30px, 4.5vw, 40px);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 8px;
-        }
-
-        .doc .effective {
-            font-size: 15px;
-            color: #888888;
-            margin-bottom: 48px;
-        }
-
-        .doc h3 {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            margin: 44px 0 16px;
-        }
-
-        .doc h3 .num {
-            color: #888888;
-            margin-right: 10px;
-            font-weight: 600;
-        }
-
-        .doc p {
-            font-size: 17px;
-            color: #1a1a1a;
-            margin-bottom: 18px;
-        }
-
-        .doc p.emphasis {
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: 0.01em;
-        }
-
-        .doc ul,
-        .doc ol {
-            margin: 0 0 18px 24px;
-        }
-
-        .doc li {
-            font-size: 17px;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-        }
-
-        /* ----- UNDERLINED KEYWORDS (instead of bold) ----- */
-        .doc u,
-        .doc .underline {
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-thickness: 1.5px;
-            font-weight: 500;
-        }
-
-        /* Keep bold only for very specific emphasis, but prefer underline */
-        .doc strong {
-            font-weight: 600;
-        }
-
-        /* List item leading keywords — underlined */
-        .doc li u,
-        .doc li .underline {
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            text-decoration-thickness: 1.5px;
-            font-weight: 500;
-        }
-
-        /* Ensure footer styling from style.css is used */
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrepHooks, Pass Before The Exam</title>
+  <meta name="description" content="A proven Exam Prep experience that actually works. Effective, Intelligent & Fun. For NMCN, MDCN, JAMB, WASSCE." />
+  <link rel="stylesheet" href="/style.css" />
+  <script>(function(){try{var p=new URLSearchParams(location.search);if(p.get('origin')==='app')document.documentElement.classList.add('embed-mode');}catch(e){}})();</script>
+  <!-- Favicons (installed 2026-09-15) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://www.prephooks.com/" />
 </head>
 <body>
-
-    <!-- ===== HEADER ===== -->
-    <header>
-        <div class="header-inner">
-            <a href="index.html" class="logo">PrepHooks</a>
-            <nav class="top-nav" id="topNav">
-                <a href="about.html">About</a>
-                <a href="market.html">Why PrepHooks</a>
-                <a href="help.html">Help</a>
-                <a href="legal.html">Legal</a>
-                <a href="download.html" class="nav-cta">Download</a>
-            </nav>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
-
-
-    <!-- ===== HERO ===== -->
-    <div class="hero">
-        <h1>Effective, Intelligent & Fun</h1>
-        <p>A proven <b>Exam Prep</b> experience that actually works.</p>
-
-<div>
-   <p class="exam-tags">For: JAMB · WAEC · NMCN · MDCN · NECO + MORE</p>
-</div>
-
-
-        <div class="cta-row" style="display: flex;
-    justify-content: center;
-">
-            <a href="download.html" class="btn btn-outline">Get started now for free</a>
-        </div>
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/images/app_logo.webp" alt="PrepHooks" loading="lazy">PrepHooks</a>
+      <nav class="top-nav" id="topNav">
+        <a href="/about">About</a>
+        <a href="/market">Why PrepHooks</a>
+        <a href="/help">Help</a>
+        <a href="/legal">Legal</a>
+        <a href="/download" class="nav-cta">Download</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
+  </header>
 
-    <!-- ===== HERO IMAGE BAND (full-bleed, edge-to-edge, capped 1280px) ===== -->
-    <!-- Swap the placeholder div for <img class="hero-media" src="assets/hero.jpg" alt="..."> when real photography is ready -->
-    <div class="fullbleed" role="img" aria-label="Nigerian and Ghanaian students studying with PrepHooks on their phones">
-        <div class="hero-media"></div>
-    </div>
-
-
-
-
-   <!-- ===== SECTION 2 ===== -->
-<section class="block">
+  <!-- HERO — bigger H1/p + exam hosts (replaced fake stats) -->
+  <section class="block">
     <div class="inner split">
-        <div class="split-text">
-            <h2>Exam success made effortless.</h2>
-            <p>No more guessing. Know exactly where you stand — and what to fix — long before exam day. With a transparent <u>real-time tracking</u> that shows your true performance level before your exam.</p>
+      <div class="split-text">
+        <div class="hero">
+        <h1>Real past questions,<br>test to learn.</h1>
+        <div style="height: 30px;"></div>
+        <p style="font-size: 150%;line-height: 130%;">Practice with real EXAM past questions, learn the concept behind every answer, and track exactly how ready you are.</p>
+        <div class="cta-row">
+          <a href="https://play.google.com/store/apps/details?id=com.prephooks.prephooks"  class="btn btn-outline" style="padding:18px 36px;font-size:17px">Get it FREE on Google Play</a>
         </div>
-        <!-- Swap placeholder for <img class="media-card-img" src="assets/section2-portrait.jpg" alt="..."> -->
-        <div class="media-card split-media" role="img" aria-label="A PrepHooks learner studying with confidence">
-            <div class="media-card-img"></div>
         </div>
+      </div>
+      <div class="hosts-wrap">
+        <div class="hosts-row">
+        <img src="/images/hosts/jamb.webp" alt="JAMB" title="JAMB">
+        <img src="/images/hosts/waec.webp" alt="WAEC/WASSCE" title="WAEC">
+        <img src="/images/hosts/neco.webp" alt="NECO" title="NECO">
+        <img src="/images/hosts/nmcn.webp" alt="NMCN" title="NMCN">
+        <img src="/images/hosts/mdcn.webp" alt="MDCN" title="MDCN">
+        <img src="/images/hosts/jupeb.webp" alt="JUPEB" title="JUPEB">
+        <img src="/images/hosts/nabteb.webp" alt="NABTEB" title="NABTEB">
+        <img src="/images/hosts/ican.webp" alt="ICAN" title="ICAN">
+        <img src="/images/hosts/ielts.png" alt="IELTS" title="IELTS">
+      </div>
+      </div>
     </div>
-</section>
+  </section>
 
-
-    <!-- ===== SECTION 1 ===== -->
-    <section class="hero">
-        <div class="inner">
-            <h1>PrepHooks is a guided, exam-driven experience, Made for you.</h1>
-<p>An active applied learning experience crafted with one single purpose: your success.</p>
-        </div>
-    </section>
-
-
-
- 
-
-
-    <!-- ===== SECTION 3 ===== -->
-    <section class="block">
+  <!-- Understand it, then prove it — replaces chatbot framing -->
+  <section class="hooky-block" aria-label="Understand it, then prove it">
     <div class="inner">
-        <h2>How it works</h2>
-        <p>Prephooks Teach, Test, and Track in one seamless loop, with our bite-sized lessons, targeted question feeds, and a transparent real-time tracking, <u>all in one place.</u></p>
-        <div class="chips">
-            <!-- Swap each placeholder for <img class="chip-img" src="assets/teach.jpg" alt="..."> -->
-            <div class="chip">
-                <div class="media-card"><div class="chip-img"></div></div>
-                <b>Teach</b>
-                <small>Bite-sized lessons that stick</small>
-            </div>
-            <div class="chip">
-                <div class="media-card"><div class="chip-img"></div></div>
-                <b>Test</b>
-                <small>Targeted question feeds</small>
-            </div>
-            <div class="chip">
-                <div class="media-card"><div class="chip-img"></div></div>
-                <b>Track</b>
-                <small>Real-time performance insight</small>
-            </div>
-        </div>
+      <div class="hooky-icon-wrap">
+        <img src="/images/hooky1.webp" alt="" class="hooky-icon" loading="lazy">
+      </div>
+      <h2>Understand it. Then prove it.</h2>
+      <p class="hooky-sub" style="font-size: 150%;line-height: 130%;">Every topic starts with a short, clear explanation, and then a question tied directly to it. You never practice blind, so you always know why an answer is right before you move on.</p>
+      <div class="cta-row" style="justify-content:center;margin-top:24px;">
+        <a href="https://play.google.com/store/apps/details?id=com.prephooks.prephooks" class="btn btn-primary" style="padding:16px 32px;">Download on Google Play</a>
+      </div>
     </div>
-</section>
+  </section>
 
-
-
-    <!-- ===== SECTION 4 ===== -->
-    <section class="block">
-    <div class="inner split reverse">
-        <div class="split-text">
-            <h2>Intelligence, to your pace.</h2>
-            <p>We pay attention to how you perform, we bring back <u>what you missed</u> right when you need to review them, until every weak spot becomes a strength.</p>
-        </div>
-        <div class="phone-mock" role="img" aria-label="PrepHooks app dashboard showing personalized review">
-            <div class="phone-notch"></div>
-            <div class="phone-ui"></div>
-            <div class="phone-label">Your personalized review</div>
-        </div>
+   <!-- 02 — The feed that knows you (home) -->
+  <section class="hooky-block media-centered" aria-label="Stress is not learning">
+    <div class="inner">
+      <div class="phone-mock" style="margin:0 auto 28px;" role="img" aria-label="Home feed — your next question is already waiting">
+        <img src="/images/home.webp" alt="PrepHooks home feed" style="object-position:top;" loading="lazy">
+      </div>
+      <h2>Know exactly how ready you are.</h2>
+      <p class="hooky-sub" style="font-size: 150%;line-height: 130%;">Your Readiness Score isn't just a percentage, it's a diagnosis. PrepHooks tracks what you've covered and how well you've mastered it, and then shows you precisely which topics are holding your score back.</p>
+      <div class="cta-row" style="justify-content:center;margin-top:24px;">
+        <a href="https://play.google.com/store/apps/details?id=com.prephooks.prephooks" class="btn btn-outline" style="padding:14px 28px;">Try a calm session, free</a>
+      </div>
     </div>
-</section>
+  </section>
 
-    <!-- ===== DOWNLOAD CTA ===== -->
-    <div class="download" id="download">
-        <div class="inner">
-            <h2>Test to learn.</h2>
-            <p>Download PrepHooks and start preparing the way that actually works.</p>
-            <div class="phone-mock" role="img" aria-label="PrepHooks mobile app">
-                <div class="phone-notch"></div>
-                <div class="phone-ui"></div>
-                <div class="phone-label">PrepHooks for iOS &amp; Android</div>
-            </div>
-            <div class="cta-row">
-                <a href="download.html" class="btn">Download for Android</a>
-                <a href="download.html" class="btn btn-outline">Download for iPhone</a>
-            </div>
-        </div>
+  <!-- 05 — TEACH (lesson) -->
+  <section class="hooky-block media-centered" aria-label="Teach — bite-sized lessons">
+    <div class="inner">
+      <div class="phone-mock" style="margin:0 auto 28px;" role="img" aria-label="Lesson playground — teach then test">
+        <img src="/images/lesson.webp" alt="PrepHooks lesson playground" style="object-position:top;" loading="lazy">
+      </div>
+      <h2>1. Teach</h2>
+      <p class="hooky-sub" style="font-size: 150%;line-height: 130%;">Learn essential concepts in under three minutes without feeling overwhelmed by information.</p>
     </div>
+  </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        <div class="footer-inner">
-            <a href="index.html" class="logo" style="font-size:18px;">PrepHooks</a>
-            <nav class="footer-nav">
-                <a href="about.html">About</a>
-                <a href="help.html">Help</a>
-                <a href="legal.html">Legal</a>
-            </nav>
-            <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
-        </div>
-    </footer>
+  <!-- 07 — TEST (test) -->
+  <section class="hooky-block media-centered" aria-label="Test — retrieval that builds memory">
+    <div class="inner">
+      <div class="phone-mock" style="margin:0 auto 28px;" role="img" aria-label="Adaptive practice — retrieval not recognition">
+        <img src="/images/test.webp" alt="PrepHooks adaptive practice" style="object-position:top;" loading="lazy">
+      </div>
+      <h2>2. Test</h2>
+      <p class="hooky-sub" style="font-size: 150%;line-height: 130%;">
+        Answer real past JAMB, WAEC &amp; NECO questions, timed and structured exactly like exam day. Practice solo, or drop into a live quiz with friends and see who's actually ready.
+      </p>
+    </div>
+  </section>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script>
-        const toggle = document.getElementById('navToggle');
-        const nav = document.getElementById('topNav');
-        if (toggle && nav) {
-            toggle.addEventListener('click', () => nav.classList.toggle('open'));
-            nav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => nav.classList.remove('open'));
-            });
-        }
-    </script>
+  <!-- 08 — TRACK (track) -->
+  <section class="hooky-block media-centered" aria-label="Track — honesty before confidence">
+    <div class="inner">
+      <div class="phone-mock" style="margin:0 auto 28px;" role="img" aria-label="Track readiness — honesty before confidence">
+        <img src="/images/track.webp" alt="PrepHooks track and readiness" style="object-position:top;" loading="lazy">
+      </div>
+      <h2>3. Track</h2>
+      <p class="hooky-sub" style="font-size: 150%;line-height: 130%;">Watch your Readiness Score move as your home feed resurfaces weak topics right when you need them.</p>
+    </div>
+  </section>
 
+  <!-- Why it works -->
+  <section class="hooky-block" aria-label="Why it works">
+    <div class="inner">
+      <div class="hooky-icon-wrap">
+        <img src="/images/heart.webp" alt="" class="hooky-icon" loading="lazy">
+      </div>
+      <h2>Built to be finished, not just started.</h2>
+      <p class="hooky-sub" style="font-size: 150%;line-height: 130%;">Bite-sized lessons, real past questions, and a syllabus that never leaves you guessing what's next. Studying that's easy to come back to, every day.</p>
+    </div>
+  </section>
+
+  <!-- Pricing — Brilliant: 3 soft rounded cards, generous breathing room -->
+  <section class="block" style="background:var(--soft);max-width:none;margin:0;padding-left:var(--gutter);padding-right:var(--gutter);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div style="max-width:1120px;margin:0 auto;text-align:center;">
+      <div class="inner">
+      <h2>Download PrepHooks.</h2>
+      <p class="hooky-sub" style="font-size: 150%;line-height: 130%;">Real past questions. Real readiness. Free to start.</p>
+    </div>
+      <div>
+          <div style="height: 50px;"></div>
+          <div class="pocket-badges">
+            <a href="https://play.google.com/store/apps/details?id=com.prephooks.prephooks" aria-label="Get it on Google Play" style="display:block;width:200px;aspect-ratio:200/60;border:1px solid #0B0B0B;overflow:hidden;position:relative;border-radius:15px;">
+              <img
+                src="/images/google_play.webp"
+                alt="Get it on Google Play"
+                style="
+                  width: 100% !important;
+                  height: 100%;
+                  -o-object-fit: cover;
+                  object-fit: cover;
+                  position: absolute !important;
+                  top: 0 !important;
+                  left: 0 !important"
+                loading="lazy">
+            </a>
+            <a href="/download" aria-label="More download options including App Store" style="display:block;width:200px;aspect-ratio:200/60;border:1px solid #0B0B0B;overflow:hidden;position:relative;border-radius:15px;">
+                <img
+                src="/images/app_store.webp"
+                alt="Download on the App Store"
+                style="
+                  width: 100% !important;
+                  height: 100%;
+                  -o-object-fit: cover;
+                  object-fit: cover;
+                  position: absolute !important;
+                  top: 0 !important;
+                  left: 0 !important"
+                loading="lazy">
+            </a>
+          </div>
+          <div style="height: 50px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="logo">PrepHooks</a>
+      <nav class="footer-nav"><a href="/about">About</a><a href="/help">Help</a><a href="/legal">Legal</a></nav>
+      <div class="footer-meta">© 2026 PrepHooks Nigeria Limited. All rights reserved.</div>
+    </div>
+  </footer>
+  <script>
+    const t=document.getElementById('navToggle'), n=document.getElementById('topNav');
+    if(t&&n){t.addEventListener('click',()=>n.classList.toggle('open'));n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>n.classList.remove('open')));}
+  </script>
 </body>
 </html>
